@@ -160,6 +160,7 @@
 .dd-wb__disc span{display:block; max-width:1100px; margin:0 auto;}
 
 .dd-wb__mob{display:none;}
+.dd-wb__cue{display:none;}
 .dd-wb__sticky{display:none;}
 
 /* ---------- tablet ---------- */
@@ -208,9 +209,9 @@
   .dd-wb__col{display:contents;}
   .dd-wb__eyebrow{order:1;}
   .dd-wb__h1{order:2;}
-  .dd-wb__rail{order:3;}
+  .dd-wb__rail{order:5;}
   .dd-wb__sheet{order:4;}
-  .dd-wb__h2{order:5;}
+  .dd-wb__h2{order:3;}
 
   /* headline on the photo */
   .dd-wb__eyebrow{
@@ -226,7 +227,13 @@
   .dd-wb__mark:before{bottom:.05em; height:.88em;}
 
   /* form: on the first screen, compact */
-  .dd-wb__rail{width:auto; margin:0;}
+  .dd-wb__cue{
+    display:block; margin:0 0 10px; font-size:13px; font-weight:700;
+    color:var(--w-ink); text-align:center;
+  }
+  .dd-wb__cue:before{content:""; display:block; width:34px; height:2px;
+    background:var(--w-red); margin:0 auto 10px;}
+  .dd-wb__rail{width:auto; margin:22px 0 0;}
   .dd-wb__bar{
     border-radius:14px 14px 0 0; border-left:0; border-top:3px solid var(--w-red);
     display:grid; grid-template-columns:repeat(4,1fr);
@@ -248,22 +255,22 @@
   .dd-wb__name{margin:12px 0 0; font-size:10px; color:var(--w-mut);}
 
   /* supporting copy sits below the fold where it belongs */
-  .dd-wb__sheet{background:none; margin:26px 0 0; padding:0; border-radius:0;}
+  .dd-wb__sheet{background:none; margin:0; padding:0; border-radius:0;}
   .dd-wb__sheet:before{display:none;}
   .dd-wb__h2{
-    color:var(--w-ink); font-size:15px; font-weight:600; line-height:1.5;
-    max-width:none; margin:18px 0 0; padding-top:16px; border-top:1px solid var(--w-hair);
+    color:var(--w-ink); font-size:16px; font-weight:700; line-height:1.45;
+    max-width:none; margin:0 0 16px; padding:0; border:0;
   }
   .dd-wb__lead{
-    font-size:16px; line-height:1.55; max-width:none; margin:0 0 16px;
-    color:var(--w-ink); font-weight:600;
+    font-size:15.5px; line-height:1.55; max-width:none; margin:0 0 14px;
+    color:var(--w-body); font-weight:500;
   }
 
   /* bullets: block layout, marker absolute, so bold words never break the row */
-  .dd-wb__mob{display:block; list-style:none; margin:0 0 18px; padding:0;}
+  .dd-wb__mob{display:block; list-style:none; margin:0 0 16px; padding:0;}
   .dd-wb__mob li{
-    display:block; position:relative; padding:12px 0 12px 20px;
-    font-size:15px; line-height:1.5; color:var(--w-body);
+    display:block; position:relative; padding:10px 0 10px 20px;
+    font-size:15px; line-height:1.45; color:var(--w-body);
     border-bottom:1px solid var(--w-hair);
   }
   .dd-wb__mob li:first-child{border-top:1px solid var(--w-hair);}
@@ -275,7 +282,7 @@
 
   /* proof strip, scrolls sideways */
   .dd-wb__proof{
-    display:flex; gap:9px; margin:0 -18px; padding:0 18px 6px;
+    display:flex; gap:9px; margin:0 -18px 2px; padding:0 18px 6px;
     overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   .dd-wb__proof::-webkit-scrollbar{display:none;}
@@ -345,9 +352,9 @@
   .dd-wb--m .dd-wb__col{display:contents;}
   .dd-wb--m .dd-wb__eyebrow{order:1;}
   .dd-wb--m .dd-wb__h1{order:2;}
-  .dd-wb--m .dd-wb__rail{order:3;}
+  .dd-wb--m .dd-wb__rail{order:5;}
   .dd-wb--m .dd-wb__sheet{order:4;}
-  .dd-wb--m .dd-wb__h2{order:5;}
+  .dd-wb--m .dd-wb__h2{order:3;}
 
   /* headline on the photo */
   .dd-wb--m .dd-wb__eyebrow{
@@ -363,7 +370,13 @@
   .dd-wb--m .dd-wb__mark:before{bottom:.05em; height:.88em;}
 
   /* form: on the first screen, compact */
-  .dd-wb--m .dd-wb__rail{width:auto; margin:0;}
+  .dd-wb--m .dd-wb__cue{
+    display:block; margin:0 0 10px; font-size:13px; font-weight:700;
+    color:var(--w-ink); text-align:center;
+  }
+  .dd-wb--m .dd-wb__cue:before{content:""; display:block; width:34px; height:2px;
+    background:var(--w-red); margin:0 auto 10px;}
+  .dd-wb--m .dd-wb__rail{width:auto; margin:22px 0 0;}
   .dd-wb--m .dd-wb__bar{
     border-radius:14px 14px 0 0; border-left:0; border-top:3px solid var(--w-red);
     display:grid; grid-template-columns:repeat(4,1fr);
@@ -385,22 +398,22 @@
   .dd-wb--m .dd-wb__name{margin:12px 0 0; font-size:10px; color:var(--w-mut);}
 
   /* supporting copy sits below the fold where it belongs */
-  .dd-wb--m .dd-wb__sheet{background:none; margin:26px 0 0; padding:0; border-radius:0;}
+  .dd-wb--m .dd-wb__sheet{background:none; margin:0; padding:0; border-radius:0;}
   .dd-wb--m .dd-wb__sheet:before{display:none;}
   .dd-wb--m .dd-wb__h2{
-    color:var(--w-ink); font-size:15px; font-weight:600; line-height:1.5;
-    max-width:none; margin:18px 0 0; padding-top:16px; border-top:1px solid var(--w-hair);
+    color:var(--w-ink); font-size:16px; font-weight:700; line-height:1.45;
+    max-width:none; margin:0 0 16px; padding:0; border:0;
   }
   .dd-wb--m .dd-wb__lead{
-    font-size:16px; line-height:1.55; max-width:none; margin:0 0 16px;
-    color:var(--w-ink); font-weight:600;
+    font-size:15.5px; line-height:1.55; max-width:none; margin:0 0 14px;
+    color:var(--w-body); font-weight:500;
   }
 
   /* bullets: block layout, marker absolute, so bold words never break the row */
-  .dd-wb--m .dd-wb__mob{display:block; list-style:none; margin:0 0 18px; padding:0;}
+  .dd-wb--m .dd-wb__mob{display:block; list-style:none; margin:0 0 16px; padding:0;}
   .dd-wb--m .dd-wb__mob li{
-    display:block; position:relative; padding:12px 0 12px 20px;
-    font-size:15px; line-height:1.5; color:var(--w-body);
+    display:block; position:relative; padding:10px 0 10px 20px;
+    font-size:15px; line-height:1.45; color:var(--w-body);
     border-bottom:1px solid var(--w-hair);
   }
   .dd-wb--m .dd-wb__mob li:first-child{border-top:1px solid var(--w-hair);}
@@ -412,7 +425,7 @@
 
   /* proof strip, scrolls sideways */
   .dd-wb--m .dd-wb__proof{
-    display:flex; gap:9px; margin:0 -18px; padding:0 18px 6px;
+    display:flex; gap:9px; margin:0 -18px 2px; padding:0 18px 6px;
     overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   .dd-wb--m .dd-wb__proof::-webkit-scrollbar{display:none;}
@@ -515,6 +528,7 @@
 
     <!-- rail -->
     <div class="dd-wb__rail">
+      <p class="dd-wb__cue">Save your spot below. It takes about twenty seconds.</p>
       <div class="dd-wb__bar">
         <div><small>Cost</small><b>FREE</b></div>
         <div><small>Date</small><b>SUN, AUG 30</b></div>
@@ -591,7 +605,7 @@
       formVisible=es[0].isIntersecting; paint();
     },{threshold:.25}).observe(f);
     window.addEventListener('scroll',function(){
-      scrolledIn=window.scrollY>240; paint();
+      scrolledIn=window.scrollY>160; paint();
     },{passive:true});
     window.__ddPaint=paint; function paint(){
       var sec2=f.closest('.dd-wb');
