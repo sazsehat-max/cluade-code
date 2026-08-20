@@ -1,6 +1,7 @@
 <!-- ============================================================
-     SECTION 1 - HERO  (namespace: dd-wb)
+     SECTION 1 - HERO  (namespace: dd-wb)  full screen, light
      Paste into a GHL Custom HTML element. Self contained.
+     Set the GHL row/section padding to 0 so this can go edge to edge.
      ============================================================ -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
 
@@ -9,152 +10,209 @@
   --w-bg:#f7f4ef; --w-card:#ffffff; --w-ink:#17150f; --w-body:#4c4740;
   --w-mut:#7a746c; --w-hair:#e3ddd3; --w-red:#e02a20; --w-gold:#a8782c;
   --w-yellow:#ffd400; --w-yellow-dk:#f5b700;
+  position:relative; isolation:isolate;
+  min-height:100svh; display:flex; align-items:center;
+  width:100vw; margin-left:calc(50% - 50vw);
+  padding:72px 0 56px; overflow:hidden;
   background:
-    radial-gradient(900px 520px at 82% 8%, #fffdf7 0%, rgba(255,253,247,0) 62%),
-    linear-gradient(180deg,#fbf9f5 0%, var(--w-bg) 46%, #f2eee6 100%);
+    radial-gradient(1100px 700px at 68% 18%, #fffdf8 0%, rgba(255,253,248,0) 60%),
+    linear-gradient(160deg,#fbfaf6 0%, var(--w-bg) 52%, #efeae1 100%);
   color:var(--w-body);
   font-family:'Poppins',system-ui,-apple-system,sans-serif;
-  padding:54px 20px 60px;
-  position:relative; overflow:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 .dd-wb *{box-sizing:border-box;}
-.dd-wb__wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:start;}
 
-/* ---------- left column ---------- */
+/* ---------- background photo, right side, merged ---------- */
+.dd-wb__bg{
+  position:absolute; inset:0 0 0 auto; width:60%; z-index:-2; pointer-events:none;
+}
+.dd-wb__bg img{
+  width:100%; height:100%; object-fit:cover; object-position:58% 22%;
+  display:block; filter:brightness(.94) contrast(.96) saturate(.8);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 16%, rgba(0,0,0,.85) 42%, #000 62%),
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 72%, transparent 99%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.28) 16%, rgba(0,0,0,.85) 42%, #000 62%),
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 72%, transparent 99%);
+  -webkit-mask-composite:source-in; mask-composite:intersect;
+}
+.dd-wb__wash{
+  position:absolute; inset:0 0 0 auto; width:62%; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(to right, var(--w-bg) 4%, rgba(247,244,239,.55) 30%, rgba(247,244,239,0) 58%),
+    linear-gradient(200deg, rgba(168,120,44,.16), rgba(247,244,239,0) 55%);
+}
+/* faint ticker texture behind everything */
+.dd-wb__grid{
+  position:absolute; inset:0; z-index:-3; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--w-hair) 1px, transparent 1px);
+  background-size:100% 74px;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+}
+
+/* ---------- layout ---------- */
+.dd-wb__wrap{
+  width:100%; max-width:1280px; margin:0 auto; padding:0 clamp(20px,4vw,56px);
+  display:grid; grid-template-columns:minmax(0,600px) 1fr; gap:40px; align-items:center;
+}
+.dd-wb__col{max-width:600px;}
+
+/* ---------- eyebrow ---------- */
 .dd-wb__eyebrow{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--w-ink);background:var(--w-yellow);
-  border:2px solid var(--w-ink);border-radius:2px;padding:7px 13px;margin:0 0 22px;
+  display:inline-flex; align-items:center; gap:9px; margin:0 0 22px;
+  font-size:11.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--w-ink); background:rgba(255,255,255,.72); backdrop-filter:blur(6px);
+  border:1px solid var(--w-ink); border-radius:100px; padding:8px 16px 8px 13px;
 }
-.dd-wb__dot{width:8px;height:8px;border-radius:50%;background:var(--w-red);
-  animation:dd-wb-pulse 1.6s ease-in-out infinite;}
-@keyframes dd-wb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.dd-wb__dot{width:7px;height:7px;border-radius:50%;background:var(--w-red);
+  box-shadow:0 0 0 0 rgba(224,42,32,.5); animation:dd-wb-pulse 1.8s ease-out infinite;}
+@keyframes dd-wb-pulse{
+  0%{box-shadow:0 0 0 0 rgba(224,42,32,.55)}
+  70%{box-shadow:0 0 0 9px rgba(224,42,32,0)}
+  100%{box-shadow:0 0 0 0 rgba(224,42,32,0)}
+}
 
+/* ---------- headline ---------- */
 .dd-wb__h1{
-  font-family:'Anton',Impact,sans-serif;font-weight:400;
-  font-size:clamp(42px,5.6vw,80px);line-height:.92;letter-spacing:-.01em;
-  text-transform:uppercase;color:var(--w-ink);margin:0 0 20px;
+  font-family:'Anton',Impact,sans-serif; font-weight:400;
+  font-size:clamp(44px,6.2vw,88px); line-height:.9; letter-spacing:-.005em;
+  text-transform:uppercase; color:var(--w-ink); margin:0 0 22px;
 }
-.dd-wb__mark{
-  background:linear-gradient(180deg,transparent 56%,var(--w-yellow) 56%,var(--w-yellow) 94%,transparent 94%);
-  padding:0 4px;
+.dd-wb__mark{position:relative; display:inline-block; padding:0 6px; z-index:0;}
+.dd-wb__mark:before{
+  content:""; position:absolute; left:0; right:0; bottom:.1em; height:.42em; z-index:-1;
+  background:var(--w-yellow); transform:skewX(-3deg);
 }
 .dd-wb__h2{
-  font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.42;
-  color:var(--w-ink);margin:0 0 18px;max-width:34ch;
+  font-size:clamp(17px,1.7vw,21px); font-weight:700; line-height:1.45;
+  color:var(--w-ink); margin:0 0 16px; max-width:30ch;
 }
-.dd-wb__lead{font-size:16px;line-height:1.66;margin:0 0 16px;max-width:52ch;}
-.dd-wb__lead strong{color:var(--w-ink);font-weight:700;}
-.dd-wb__rule{height:1px;background:var(--w-hair);border:0;margin:24px 0;max-width:52ch;}
-.dd-wb__ask{font-family:'Caveat',cursive;font-size:24px;color:var(--w-gold);margin:0 0 6px;}
+.dd-wb__lead{font-size:15.5px; line-height:1.68; margin:0 0 14px; max-width:46ch;}
+.dd-wb__lead strong{color:var(--w-ink); font-weight:700;}
+.dd-wb__ask{font-family:'Caveat',cursive; font-size:23px; color:var(--w-gold); margin:18px 0 2px;}
 
-/* ---------- proof cards ---------- */
-.dd-wb__proof{display:flex;gap:14px;flex-wrap:wrap;margin:26px 0 0;}
+/* ---------- proof chips ---------- */
+.dd-wb__proof{display:flex; gap:10px; flex-wrap:wrap; margin:24px 0 0;}
 .dd-wb__pc{
-  background:var(--w-card);border:2px solid var(--w-ink);
-  box-shadow:6px 6px 0 var(--w-ink);padding:16px 20px;min-width:190px;flex:1 1 190px;
+  display:flex; align-items:baseline; gap:10px; padding:11px 16px;
+  background:rgba(255,255,255,.8); backdrop-filter:blur(8px);
+  border:1px solid var(--w-hair); border-radius:100px;
+  box-shadow:0 1px 2px rgba(23,21,15,.05);
 }
-.dd-wb__pc b{
-  display:block;font-family:'Anton',Impact,sans-serif;font-weight:400;
-  font-size:38px;line-height:1;color:var(--w-ink);letter-spacing:.01em;
-}
-.dd-wb__pc span{
-  display:block;margin-top:7px;font-size:11px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--w-mut);
-}
-.dd-wb__pc--red{border-color:var(--w-ink);}
+.dd-wb__pc b{font-family:'Anton',Impact,sans-serif; font-weight:400; font-size:23px; line-height:1; color:var(--w-ink);}
 .dd-wb__pc--red b{color:var(--w-red);}
+.dd-wb__pc span{font-size:10.5px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:var(--w-mut);}
 
-/* ---------- right column / photo ---------- */
-.dd-wb__media{position:relative;}
-.dd-wb__chart{
-  position:absolute;inset:-14px -10px auto -18px;height:280px;width:auto;
-  opacity:.5;z-index:0;pointer-events:none;
-}
-.dd-wb__photo{
-  position:relative;z-index:1;border:2px solid var(--w-ink);
-  box-shadow:10px 10px 0 var(--w-ink);overflow:hidden;background:var(--w-ink);
-}
-.dd-wb__photo img{
-  display:block;width:100%;height:auto;
-  filter:brightness(.8) saturate(.85);
-}
-.dd-wb__tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(168,120,44,.16),rgba(23,21,15,.34));}
-.dd-wb__cap{
-  position:absolute;left:0;right:0;bottom:0;z-index:2;
-  padding:14px 16px;background:linear-gradient(180deg,rgba(23,21,15,0),rgba(23,21,15,.92));
-  color:#fff;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-}
-
-/* ---------- event bar ---------- */
+/* ---------- right rail: event + form ---------- */
+.dd-wb__rail{justify-self:end; width:min(430px,100%);}
 .dd-wb__bar{
-  position:relative;z-index:1;margin:24px 0 0;background:#17150f;color:#fff;
-  border-left:6px solid var(--w-red);display:grid;grid-template-columns:repeat(4,1fr);
+  display:flex; align-items:stretch; background:var(--w-ink); color:#fff;
+  border-radius:12px 12px 0 0; border-left:5px solid var(--w-red); overflow:hidden;
 }
-.dd-wb__bar div{padding:14px 12px;border-right:1px solid rgba(255,255,255,.14);text-align:center;}
+.dd-wb__bar div{flex:1; padding:12px 8px; text-align:center; border-right:1px solid rgba(255,255,255,.12);}
 .dd-wb__bar div:last-child{border-right:0;}
-.dd-wb__bar small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#b7b0a5;margin-bottom:4px;}
-.dd-wb__bar b{font-size:14px;font-weight:700;letter-spacing:.02em;}
+.dd-wb__bar small{display:block; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:#a8a196; margin-bottom:3px;}
+.dd-wb__bar b{font-size:12.5px; font-weight:700; letter-spacing:.02em; white-space:nowrap;}
 
-/* ---------- form ---------- */
 .dd-wb__form{
-  position:relative;z-index:1;margin:22px 0 0;background:var(--w-card);
-  border:2px solid var(--w-ink);box-shadow:8px 8px 0 var(--w-ink);padding:22px;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(14px);
+  border:1px solid var(--w-hair); border-top:0; border-radius:0 0 12px 12px;
+  padding:24px 24px 20px; box-shadow:0 24px 60px -24px rgba(23,21,15,.35), 0 2px 6px rgba(23,21,15,.06);
 }
-.dd-wb__ftitle{font-size:13px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--w-ink);margin:0 0 14px;}
-.dd-wb__row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dd-wb__ftitle{font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--w-ink); margin:0 0 4px;}
+.dd-wb__fsub{font-size:12.5px; color:var(--w-mut); margin:0 0 16px;}
+.dd-wb__row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
 .dd-wb input{
-  width:100%;padding:13px 14px;margin:0 0 10px;font-family:inherit;font-size:15px;
-  color:var(--w-ink);background:#fdfcfa;border:1.5px solid var(--w-hair);border-radius:2px;outline:none;
+  width:100%; padding:14px 15px; margin:0 0 10px; font-family:inherit; font-size:15px;
+  color:var(--w-ink); background:#fbf9f5; border:1px solid var(--w-hair); border-radius:9px;
+  outline:none; transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
-.dd-wb input:focus{border-color:var(--w-ink);background:#fff;}
-.dd-wb input::placeholder{color:#a29b91;}
-.dd-wb__hp{position:absolute;left:-9999px;opacity:0;height:0;}
+.dd-wb input:focus{border-color:var(--w-ink); background:#fff; box-shadow:0 0 0 3px rgba(255,212,0,.35);}
+.dd-wb input::placeholder{color:#a8a199;}
+.dd-wb__hp{position:absolute; left:-9999px; opacity:0; height:0;}
 .dd-wb__btn{
-  width:100%;margin-top:4px;padding:18px 20px;cursor:pointer;
-  font-family:'Anton',Impact,sans-serif;font-size:21px;letter-spacing:.045em;text-transform:uppercase;
-  color:var(--w-ink);background:linear-gradient(180deg,var(--w-yellow),var(--w-yellow-dk));
-  border:2px solid var(--w-ink);border-radius:2px;box-shadow:0 5px 0 var(--w-ink);
-  transition:transform .06s ease, box-shadow .06s ease;
+  width:100%; margin-top:6px; padding:17px 20px; cursor:pointer; border-radius:10px;
+  font-family:'Anton',Impact,sans-serif; font-size:20px; letter-spacing:.045em; text-transform:uppercase;
+  color:var(--w-ink); background:linear-gradient(180deg,var(--w-yellow),var(--w-yellow-dk));
+  border:0; box-shadow:0 4px 0 #c99700, 0 12px 24px -8px rgba(201,151,0,.6);
+  transition:transform .08s ease, box-shadow .08s ease, filter .15s ease;
 }
-.dd-wb__btn:hover{transform:translateY(1px);box-shadow:0 4px 0 var(--w-ink);}
-.dd-wb__btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--w-ink);}
-.dd-wb__btn[disabled]{opacity:.6;cursor:wait;}
-.dd-wb__micro{margin:12px 0 0;text-align:center;font-size:12px;font-weight:600;color:var(--w-mut);}
-.dd-wb__micro span{margin:0 6px;}
-.dd-wb__err{display:none;margin:10px 0 0;font-size:13px;font-weight:600;color:var(--w-red);text-align:center;}
+.dd-wb__btn:hover{filter:brightness(1.04); transform:translateY(-1px); box-shadow:0 5px 0 #c99700, 0 16px 28px -8px rgba(201,151,0,.6);}
+.dd-wb__btn:active{transform:translateY(4px); box-shadow:0 0 0 #c99700, 0 4px 10px -4px rgba(201,151,0,.5);}
+.dd-wb__btn[disabled]{opacity:.65; cursor:wait;}
+.dd-wb__micro{margin:12px 0 0; text-align:center; font-size:11.5px; font-weight:600; color:var(--w-mut);}
+.dd-wb__micro i{font-style:normal; color:var(--w-hair); margin:0 7px;}
+.dd-wb__err{display:none; margin:10px 0 0; font-size:12.5px; font-weight:600; color:var(--w-red); text-align:center;}
+.dd-wb__name{
+  margin:14px 0 0; text-align:center; font-size:11px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--w-mut);
+}
 
 /* ---------- disclaimer ---------- */
 .dd-wb__disc{
-  max-width:1180px;margin:34px auto 0;padding-top:18px;border-top:1px solid var(--w-hair);
-  font-size:11.5px;line-height:1.7;color:var(--w-mut);
+  position:absolute; left:0; right:0; bottom:0; padding:14px clamp(20px,4vw,56px);
+  background:linear-gradient(180deg, rgba(247,244,239,0), rgba(247,244,239,.95) 40%);
+  font-size:10.5px; line-height:1.65; color:var(--w-mut); text-align:center;
+}
+.dd-wb__disc span{display:block; max-width:1100px; margin:0 auto;}
+
+/* ---------- tablet ---------- */
+@media (max-width:1080px){
+  .dd-wb__wrap{grid-template-columns:1fr; gap:34px;}
+  .dd-wb__rail{justify-self:start; width:min(430px,100%);}
+  .dd-wb__bg{width:100%; inset:0;}
+  .dd-wb__bg img{
+    object-position:66% 16%;
+    -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.35) 42%, transparent 66%);
+    mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.35) 42%, transparent 66%);
+    -webkit-mask-composite:source-over; mask-composite:add;
+  }
+  .dd-wb__wash{width:100%; background:linear-gradient(to bottom, rgba(247,244,239,.55), var(--w-bg) 55%);}
 }
 
 /* ---------- mobile ---------- */
-@media (max-width:900px){
-  .dd-wb{padding:34px 16px 44px;}
-  .dd-wb__wrap{grid-template-columns:1fr;gap:30px;}
-  .dd-wb__h1{font-size:clamp(34px,10vw,50px);}
-  .dd-wb__chart{display:none;}
-  .dd-wb__bar{grid-template-columns:1fr 1fr;}
+@media (max-width:760px){
+  .dd-wb{min-height:auto; padding:0 0 40px; display:block;}
+  .dd-wb__grid{display:none;}
+  .dd-wb__bg{position:relative; width:100%; height:46vh; min-height:280px; inset:auto;}
+  .dd-wb__bg img{
+    object-position:62% 12%;
+    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 52%, transparent 97%);
+    mask-image:linear-gradient(to bottom, #000 0%, #000 52%, transparent 97%);
+  }
+  .dd-wb__wash{position:absolute; top:0; height:46vh; min-height:280px; width:100%;
+    background:linear-gradient(to bottom, rgba(247,244,239,.15), rgba(247,244,239,.9) 82%);}
+  .dd-wb__wrap{padding:0 18px; margin-top:-52px; position:relative; z-index:1;}
+  .dd-wb__h1{font-size:clamp(36px,11vw,56px);}
+  .dd-wb__lead,.dd-wb__h2{max-width:none;}
+  .dd-wb__bar{border-radius:10px 10px 0 0; flex-wrap:wrap;}
+  .dd-wb__bar div{flex:1 1 50%; border-bottom:1px solid rgba(255,255,255,.12);}
   .dd-wb__bar div:nth-child(2){border-right:0;}
-  .dd-wb__bar div:nth-child(1),.dd-wb__bar div:nth-child(2){border-bottom:1px solid rgba(255,255,255,.14);}
-  .dd-wb__photo{box-shadow:7px 7px 0 var(--w-ink);}
-  .dd-wb__form{box-shadow:6px 6px 0 var(--w-ink);padding:18px;}
+  .dd-wb__form{padding:20px 18px 18px;}
+  .dd-wb__disc{position:static; padding:22px 18px 0; background:none;}
 }
-@media (max-width:460px){
+@media (max-width:420px){
   .dd-wb__row{grid-template-columns:1fr;}
-  .dd-wb__pc{min-width:100%;}
-  .dd-wb__btn{font-size:18px;padding:16px;}
+  .dd-wb__btn{font-size:18px;}
+  .dd-wb__pc{flex:1 1 100%;}
 }
+@media (prefers-reduced-motion:reduce){.dd-wb__dot{animation:none;}}
 </style>
 
 <section class="dd-wb">
+  <div class="dd-wb__grid" aria-hidden="true"></div>
+  <div class="dd-wb__bg">
+    <img src="https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/6a7f2732255b571c8e953fee.jpg" alt="DeMark Davis">
+  </div>
+  <div class="dd-wb__wash" aria-hidden="true"></div>
+
   <div class="dd-wb__wrap">
 
-    <!-- LEFT -->
-    <div>
+    <!-- copy -->
+    <div class="dd-wb__col">
       <div class="dd-wb__eyebrow"><i class="dd-wb__dot"></i> Free Live Trading Workshop</div>
 
       <h1 class="dd-wb__h1">Stop <span class="dd-wb__mark">Guessing</span><br>In The Market.</h1>
@@ -163,62 +221,30 @@
 
       <p class="dd-wb__lead">You need to know what you are looking for, when to enter, how much to risk, and when it is time to <strong>get out</strong>.</p>
 
-      <p class="dd-wb__lead">On <strong>Sunday, August 30 at 6:00 PM ET</strong>, trader and investor DeMark Davis is going live for a 90 minute trading workshop showing the framework he uses to trade the financial markets, including the thinking behind a session where he made <strong>$45,000 trading the Dow</strong>.</p>
+      <p class="dd-wb__lead">On <strong>Sunday, August 30 at 6:00 PM ET</strong>, trader and investor DeMark Davis goes live for a 90 minute workshop on the framework he uses to trade the financial markets, including the thinking behind a session where he made <strong>$45,000 trading the Dow</strong>.</p>
 
-      <hr class="dd-wb__rule">
-
-      <p class="dd-wb__ask">And if you have been telling yourself you need thousands before you can learn?</p>
-      <p class="dd-wb__lead">DeMark will show you how someone can begin learning with as little as <strong>$300</strong>.</p>
+      <p class="dd-wb__ask">And if you think you need thousands before you can learn?</p>
+      <p class="dd-wb__lead">He will show you how someone can begin learning with as little as <strong>$300</strong>.</p>
 
       <div class="dd-wb__proof">
-        <div class="dd-wb__pc dd-wb__pc--red">
-          <b>$45,000</b><span>Single session</span>
-        </div>
-        <div class="dd-wb__pc">
-          <b>$300</b><span>Start learning with</span>
-        </div>
+        <div class="dd-wb__pc dd-wb__pc--red"><b>$45,000</b><span>Single session</span></div>
+        <div class="dd-wb__pc"><b>$300</b><span>Start learning with</span></div>
+        <div class="dd-wb__pc"><b>90</b><span>Minutes + live Q and A</span></div>
       </div>
     </div>
 
-    <!-- RIGHT -->
-    <div class="dd-wb__media">
-      <svg class="dd-wb__chart" viewBox="0 0 420 280" fill="none" aria-hidden="true">
-        <g stroke="#d9d2c6" stroke-width="1">
-          <path d="M0 40H420M0 90H420M0 140H420M0 190H420M0 240H420"/>
-        </g>
-        <g stroke="#17150f" stroke-width="2" stroke-linecap="square">
-          <path d="M20 120V200M20 140h0"/><path d="M50 100V190"/><path d="M80 130V215"/>
-          <path d="M110 90V170"/><path d="M140 110V186"/><path d="M170 70V150"/>
-          <path d="M200 96V162"/><path d="M230 60V132"/><path d="M260 84V148"/>
-          <path d="M290 44V116"/><path d="M320 70V130"/><path d="M350 30V100"/>
-        </g>
-        <g fill="#e02a20">
-          <rect x="14" y="150" width="12" height="34"/><rect x="74" y="160" width="12" height="40"/>
-          <rect x="134" y="140" width="12" height="30"/><rect x="194" y="120" width="12" height="26"/>
-          <rect x="254" y="106" width="12" height="26"/><rect x="314" y="90" width="12" height="24"/>
-        </g>
-        <g fill="#17150f">
-          <rect x="44" y="126" width="12" height="38"/><rect x="104" y="112" width="12" height="38"/>
-          <rect x="164" y="92" width="12" height="38"/><rect x="224" y="80" width="12" height="34"/>
-          <rect x="284" y="62" width="12" height="34"/><rect x="344" y="48" width="12" height="34"/>
-        </g>
-      </svg>
-
-      <figure class="dd-wb__photo">
-        <img src="https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/6a7f2732255b571c8e953fee.jpg" alt="DeMark Davis speaking">
-        <span class="dd-wb__tint"></span>
-        <figcaption class="dd-wb__cap">DeMark Davis / Founder, Market Titans</figcaption>
-      </figure>
-
+    <!-- rail -->
+    <div class="dd-wb__rail">
       <div class="dd-wb__bar">
-        <div><small>Cost</small><b>FREE LIVE</b></div>
+        <div><small>Cost</small><b>FREE</b></div>
         <div><small>Date</small><b>SUN, AUG 30</b></div>
         <div><small>Time</small><b>6:00 PM ET</b></div>
-        <div><small>Length</small><b>90 MIN + Q&amp;A</b></div>
+        <div><small>Length</small><b>90 MIN</b></div>
       </div>
 
       <form class="dd-wb__form" id="ddWbForm" novalidate>
         <p class="dd-wb__ftitle">Save your free seat</p>
+        <p class="dd-wb__fsub">Seats are limited and the replay is not guaranteed.</p>
         <div class="dd-wb__row">
           <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required>
           <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" required>
@@ -228,14 +254,16 @@
         <input class="dd-wb__hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="dd-wb__btn" type="submit">Save My Free Seat</button>
         <p class="dd-wb__err" id="ddWbErr"></p>
-        <p class="dd-wb__micro"><span>Beginner friendly</span>|<span>No credit card required</span>|<span>Live Q&amp;A</span></p>
+        <p class="dd-wb__micro">Beginner friendly <i>|</i> No credit card required <i>|</i> Live Q and A</p>
       </form>
+
+      <p class="dd-wb__name">DeMark Davis / Founder, Market Titans</p>
     </div>
   </div>
 
-  <p class="dd-wb__disc">
-    The $45,000 referenced was DeMark Davis's individual result from a single trading session. It is not typical and it is not guaranteed. Most people who attempt day trading lose money. Starting with $300 does not guarantee profitability, and a small account is for learning the process, not for replacing income. Trading futures and forex involves substantial risk of loss and is not suitable for everyone. This workshop is for educational purposes only and is not investment or financial advice.
-  </p>
+  <p class="dd-wb__disc"><span>
+    The $45,000 referenced was DeMark Davis's individual result from a single trading session. It is not typical and it is not guaranteed. Most people who attempt day trading lose money. Starting with $300 does not guarantee profitability, and a small account is for learning the process, not for replacing income. Trading futures and forex involves substantial risk of loss and is not suitable for everyone. Educational only, not investment or financial advice.
+  </span></p>
 </section>
 
 <script>
