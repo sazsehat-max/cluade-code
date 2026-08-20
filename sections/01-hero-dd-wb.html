@@ -1,0 +1,269 @@
+<!-- ============================================================
+     SECTION 1 - HERO  (namespace: dd-wb)
+     Paste into a GHL Custom HTML element. Self contained.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<style>
+.dd-wb{
+  --w-bg:#f7f4ef; --w-card:#ffffff; --w-ink:#17150f; --w-body:#4c4740;
+  --w-mut:#7a746c; --w-hair:#e3ddd3; --w-red:#e02a20; --w-gold:#a8782c;
+  --w-yellow:#ffd400; --w-yellow-dk:#f5b700;
+  background:
+    radial-gradient(900px 520px at 82% 8%, #fffdf7 0%, rgba(255,253,247,0) 62%),
+    linear-gradient(180deg,#fbf9f5 0%, var(--w-bg) 46%, #f2eee6 100%);
+  color:var(--w-body);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;
+  padding:54px 20px 60px;
+  position:relative; overflow:hidden;
+}
+.dd-wb *{box-sizing:border-box;}
+.dd-wb__wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:start;}
+
+/* ---------- left column ---------- */
+.dd-wb__eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--w-ink);background:var(--w-yellow);
+  border:2px solid var(--w-ink);border-radius:2px;padding:7px 13px;margin:0 0 22px;
+}
+.dd-wb__dot{width:8px;height:8px;border-radius:50%;background:var(--w-red);
+  animation:dd-wb-pulse 1.6s ease-in-out infinite;}
+@keyframes dd-wb-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+
+.dd-wb__h1{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(42px,5.6vw,80px);line-height:.92;letter-spacing:-.01em;
+  text-transform:uppercase;color:var(--w-ink);margin:0 0 20px;
+}
+.dd-wb__mark{
+  background:linear-gradient(180deg,transparent 56%,var(--w-yellow) 56%,var(--w-yellow) 94%,transparent 94%);
+  padding:0 4px;
+}
+.dd-wb__h2{
+  font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.42;
+  color:var(--w-ink);margin:0 0 18px;max-width:34ch;
+}
+.dd-wb__lead{font-size:16px;line-height:1.66;margin:0 0 16px;max-width:52ch;}
+.dd-wb__lead strong{color:var(--w-ink);font-weight:700;}
+.dd-wb__rule{height:1px;background:var(--w-hair);border:0;margin:24px 0;max-width:52ch;}
+.dd-wb__ask{font-family:'Caveat',cursive;font-size:24px;color:var(--w-gold);margin:0 0 6px;}
+
+/* ---------- proof cards ---------- */
+.dd-wb__proof{display:flex;gap:14px;flex-wrap:wrap;margin:26px 0 0;}
+.dd-wb__pc{
+  background:var(--w-card);border:2px solid var(--w-ink);
+  box-shadow:6px 6px 0 var(--w-ink);padding:16px 20px;min-width:190px;flex:1 1 190px;
+}
+.dd-wb__pc b{
+  display:block;font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:38px;line-height:1;color:var(--w-ink);letter-spacing:.01em;
+}
+.dd-wb__pc span{
+  display:block;margin-top:7px;font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--w-mut);
+}
+.dd-wb__pc--red{border-color:var(--w-ink);}
+.dd-wb__pc--red b{color:var(--w-red);}
+
+/* ---------- right column / photo ---------- */
+.dd-wb__media{position:relative;}
+.dd-wb__chart{
+  position:absolute;inset:-14px -10px auto -18px;height:280px;width:auto;
+  opacity:.5;z-index:0;pointer-events:none;
+}
+.dd-wb__photo{
+  position:relative;z-index:1;border:2px solid var(--w-ink);
+  box-shadow:10px 10px 0 var(--w-ink);overflow:hidden;background:var(--w-ink);
+}
+.dd-wb__photo img{
+  display:block;width:100%;height:auto;
+  filter:brightness(.8) saturate(.85);
+}
+.dd-wb__tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(168,120,44,.16),rgba(23,21,15,.34));}
+.dd-wb__cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:14px 16px;background:linear-gradient(180deg,rgba(23,21,15,0),rgba(23,21,15,.92));
+  color:#fff;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ---------- event bar ---------- */
+.dd-wb__bar{
+  position:relative;z-index:1;margin:24px 0 0;background:#17150f;color:#fff;
+  border-left:6px solid var(--w-red);display:grid;grid-template-columns:repeat(4,1fr);
+}
+.dd-wb__bar div{padding:14px 12px;border-right:1px solid rgba(255,255,255,.14);text-align:center;}
+.dd-wb__bar div:last-child{border-right:0;}
+.dd-wb__bar small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#b7b0a5;margin-bottom:4px;}
+.dd-wb__bar b{font-size:14px;font-weight:700;letter-spacing:.02em;}
+
+/* ---------- form ---------- */
+.dd-wb__form{
+  position:relative;z-index:1;margin:22px 0 0;background:var(--w-card);
+  border:2px solid var(--w-ink);box-shadow:8px 8px 0 var(--w-ink);padding:22px;
+}
+.dd-wb__ftitle{font-size:13px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--w-ink);margin:0 0 14px;}
+.dd-wb__row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dd-wb input{
+  width:100%;padding:13px 14px;margin:0 0 10px;font-family:inherit;font-size:15px;
+  color:var(--w-ink);background:#fdfcfa;border:1.5px solid var(--w-hair);border-radius:2px;outline:none;
+}
+.dd-wb input:focus{border-color:var(--w-ink);background:#fff;}
+.dd-wb input::placeholder{color:#a29b91;}
+.dd-wb__hp{position:absolute;left:-9999px;opacity:0;height:0;}
+.dd-wb__btn{
+  width:100%;margin-top:4px;padding:18px 20px;cursor:pointer;
+  font-family:'Anton',Impact,sans-serif;font-size:21px;letter-spacing:.045em;text-transform:uppercase;
+  color:var(--w-ink);background:linear-gradient(180deg,var(--w-yellow),var(--w-yellow-dk));
+  border:2px solid var(--w-ink);border-radius:2px;box-shadow:0 5px 0 var(--w-ink);
+  transition:transform .06s ease, box-shadow .06s ease;
+}
+.dd-wb__btn:hover{transform:translateY(1px);box-shadow:0 4px 0 var(--w-ink);}
+.dd-wb__btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--w-ink);}
+.dd-wb__btn[disabled]{opacity:.6;cursor:wait;}
+.dd-wb__micro{margin:12px 0 0;text-align:center;font-size:12px;font-weight:600;color:var(--w-mut);}
+.dd-wb__micro span{margin:0 6px;}
+.dd-wb__err{display:none;margin:10px 0 0;font-size:13px;font-weight:600;color:var(--w-red);text-align:center;}
+
+/* ---------- disclaimer ---------- */
+.dd-wb__disc{
+  max-width:1180px;margin:34px auto 0;padding-top:18px;border-top:1px solid var(--w-hair);
+  font-size:11.5px;line-height:1.7;color:var(--w-mut);
+}
+
+/* ---------- mobile ---------- */
+@media (max-width:900px){
+  .dd-wb{padding:34px 16px 44px;}
+  .dd-wb__wrap{grid-template-columns:1fr;gap:30px;}
+  .dd-wb__h1{font-size:clamp(34px,10vw,50px);}
+  .dd-wb__chart{display:none;}
+  .dd-wb__bar{grid-template-columns:1fr 1fr;}
+  .dd-wb__bar div:nth-child(2){border-right:0;}
+  .dd-wb__bar div:nth-child(1),.dd-wb__bar div:nth-child(2){border-bottom:1px solid rgba(255,255,255,.14);}
+  .dd-wb__photo{box-shadow:7px 7px 0 var(--w-ink);}
+  .dd-wb__form{box-shadow:6px 6px 0 var(--w-ink);padding:18px;}
+}
+@media (max-width:460px){
+  .dd-wb__row{grid-template-columns:1fr;}
+  .dd-wb__pc{min-width:100%;}
+  .dd-wb__btn{font-size:18px;padding:16px;}
+}
+</style>
+
+<section class="dd-wb">
+  <div class="dd-wb__wrap">
+
+    <!-- LEFT -->
+    <div>
+      <div class="dd-wb__eyebrow"><i class="dd-wb__dot"></i> Free Live Trading Workshop</div>
+
+      <h1 class="dd-wb__h1">Stop <span class="dd-wb__mark">Guessing</span><br>In The Market.</h1>
+
+      <p class="dd-wb__h2">You do not need 40 indicators, somebody else's signals, or a huge trading account.</p>
+
+      <p class="dd-wb__lead">You need to know what you are looking for, when to enter, how much to risk, and when it is time to <strong>get out</strong>.</p>
+
+      <p class="dd-wb__lead">On <strong>Sunday, August 30 at 6:00 PM ET</strong>, trader and investor DeMark Davis is going live for a 90 minute trading workshop showing the framework he uses to trade the financial markets, including the thinking behind a session where he made <strong>$45,000 trading the Dow</strong>.</p>
+
+      <hr class="dd-wb__rule">
+
+      <p class="dd-wb__ask">And if you have been telling yourself you need thousands before you can learn?</p>
+      <p class="dd-wb__lead">DeMark will show you how someone can begin learning with as little as <strong>$300</strong>.</p>
+
+      <div class="dd-wb__proof">
+        <div class="dd-wb__pc dd-wb__pc--red">
+          <b>$45,000</b><span>Single session</span>
+        </div>
+        <div class="dd-wb__pc">
+          <b>$300</b><span>Start learning with</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="dd-wb__media">
+      <svg class="dd-wb__chart" viewBox="0 0 420 280" fill="none" aria-hidden="true">
+        <g stroke="#d9d2c6" stroke-width="1">
+          <path d="M0 40H420M0 90H420M0 140H420M0 190H420M0 240H420"/>
+        </g>
+        <g stroke="#17150f" stroke-width="2" stroke-linecap="square">
+          <path d="M20 120V200M20 140h0"/><path d="M50 100V190"/><path d="M80 130V215"/>
+          <path d="M110 90V170"/><path d="M140 110V186"/><path d="M170 70V150"/>
+          <path d="M200 96V162"/><path d="M230 60V132"/><path d="M260 84V148"/>
+          <path d="M290 44V116"/><path d="M320 70V130"/><path d="M350 30V100"/>
+        </g>
+        <g fill="#e02a20">
+          <rect x="14" y="150" width="12" height="34"/><rect x="74" y="160" width="12" height="40"/>
+          <rect x="134" y="140" width="12" height="30"/><rect x="194" y="120" width="12" height="26"/>
+          <rect x="254" y="106" width="12" height="26"/><rect x="314" y="90" width="12" height="24"/>
+        </g>
+        <g fill="#17150f">
+          <rect x="44" y="126" width="12" height="38"/><rect x="104" y="112" width="12" height="38"/>
+          <rect x="164" y="92" width="12" height="38"/><rect x="224" y="80" width="12" height="34"/>
+          <rect x="284" y="62" width="12" height="34"/><rect x="344" y="48" width="12" height="34"/>
+        </g>
+      </svg>
+
+      <figure class="dd-wb__photo">
+        <img src="https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/6a7f2732255b571c8e953fee.jpg" alt="DeMark Davis speaking">
+        <span class="dd-wb__tint"></span>
+        <figcaption class="dd-wb__cap">DeMark Davis / Founder, Market Titans</figcaption>
+      </figure>
+
+      <div class="dd-wb__bar">
+        <div><small>Cost</small><b>FREE LIVE</b></div>
+        <div><small>Date</small><b>SUN, AUG 30</b></div>
+        <div><small>Time</small><b>6:00 PM ET</b></div>
+        <div><small>Length</small><b>90 MIN + Q&amp;A</b></div>
+      </div>
+
+      <form class="dd-wb__form" id="ddWbForm" novalidate>
+        <p class="dd-wb__ftitle">Save your free seat</p>
+        <div class="dd-wb__row">
+          <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" required>
+          <input type="text" name="last_name" placeholder="Last name" autocomplete="family-name" required>
+        </div>
+        <input type="email" name="email" placeholder="Email address" autocomplete="email" required>
+        <input type="tel" name="phone" placeholder="Mobile number (for reminders)" autocomplete="tel" required>
+        <input class="dd-wb__hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="dd-wb__btn" type="submit">Save My Free Seat</button>
+        <p class="dd-wb__err" id="ddWbErr"></p>
+        <p class="dd-wb__micro"><span>Beginner friendly</span>|<span>No credit card required</span>|<span>Live Q&amp;A</span></p>
+      </form>
+    </div>
+  </div>
+
+  <p class="dd-wb__disc">
+    The $45,000 referenced was DeMark Davis's individual result from a single trading session. It is not typical and it is not guaranteed. Most people who attempt day trading lose money. Starting with $300 does not guarantee profitability, and a small account is for learning the process, not for replacing income. Trading futures and forex involves substantial risk of loss and is not suitable for everyone. This workshop is for educational purposes only and is not investment or financial advice.
+  </p>
+</section>
+
+<script>
+(function(){
+  var f=document.getElementById('ddWbForm');
+  if(!f||f.dataset.ddBound)return; f.dataset.ddBound='1';
+  var err=document.getElementById('ddWbErr');
+  var HOOK='https://services.leadconnectorhq.com/hooks/DYG4MhubhMu6t5fWQcS3/webhook-trigger/9b9f98ef-e04f-420f-bcba-7988d999eeee';
+  function q(k){try{return new URLSearchParams(window.location.search).get(k)||'';}catch(e){return '';}}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f.company.value){return;}
+    var fn=f.first_name.value.trim(), ln=f.last_name.value.trim(),
+        em=f.email.value.trim(), ph=f.phone.value.replace(/[^\d+]/g,'');
+    if(!fn||!ln||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)||ph.length<7){
+      err.style.display='block'; err.textContent='Please add your name, a valid email and a mobile number.'; return;
+    }
+    err.style.display='none';
+    var btn=f.querySelector('.dd-wb__btn'); btn.disabled=true; btn.textContent='Saving your seat...';
+    var payload={first_name:fn,last_name:ln,name:fn+' '+ln,email:em,phone:ph,
+      source:'webinar-registration',webinar:'workshop-aug30',
+      page_url:window.location.href,utm_source:q('utm_source'),utm_medium:q('utm_medium'),
+      utm_campaign:q('utm_campaign'),utm_content:q('utm_content'),utm_term:q('utm_term'),
+      fbclid:q('fbclid'),submitted_at:new Date().toISOString()};
+    function go(){window.location.href='/registration-confirmed?n='+encodeURIComponent(fn);}
+    fetch(HOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(go).catch(go);
+    setTimeout(go,3500);
+  });
+})();
+</script>

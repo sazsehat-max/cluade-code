@@ -1,0 +1,158 @@
+<!-- ============================================================
+     SECTION 4 - WHAT YOU WILL LEARN  (namespace: dd-w4)
+     Six cards, 2 columns x 3 rows on desktop.
+     Card 01 copy is DeMark's. Cards 02 to 06 are drafted from his
+     own email bullets and are ready to be swapped for his wording.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.dd-w4{
+  --w-bg:#f7f4ef; --w-card:#ffffff; --w-ink:#17150f; --w-body:#4c4740;
+  --w-mut:#7a746c; --w-hair:#e3ddd3; --w-red:#e02a20; --w-gold:#a8782c;
+  --w-yellow:#ffd400; --w-yellow-dk:#f5b700;
+  background:var(--w-bg);color:var(--w-body);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;padding:76px 20px;
+}
+.dd-w4 *{box-sizing:border-box;}
+.dd-w4__wrap{max-width:1180px;margin:0 auto;}
+.dd-w4__head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+  padding-bottom:22px;border-bottom:2px solid var(--w-ink);margin-bottom:0;
+}
+.dd-w4__eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--w-red);margin:0 0 12px;}
+.dd-w4__h2{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(32px,4.6vw,60px);line-height:.95;text-transform:uppercase;color:var(--w-ink);margin:0;
+}
+.dd-w4__when{text-align:right;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--w-mut);line-height:1.7;flex:0 0 auto;}
+.dd-w4__when b{display:block;color:var(--w-ink);font-size:15px;letter-spacing:.06em;}
+
+.dd-w4__grid{display:grid;grid-template-columns:1fr 1fr;}
+.dd-w4__c{
+  padding:34px 34px 34px 0;border-bottom:1px solid var(--w-hair);position:relative;
+}
+.dd-w4__c:nth-child(even){padding-left:34px;border-left:1px solid var(--w-hair);}
+.dd-w4__c:nth-last-child(-n+2){border-bottom:0;}
+.dd-w4__n{
+  font-family:'Anton',Impact,sans-serif;font-size:56px;line-height:1;
+  color:transparent;-webkit-text-stroke:1.5px var(--w-gold);margin:0 0 10px;display:block;
+}
+.dd-w4__tag{font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--w-mut);margin:0 0 8px;}
+.dd-w4__h3{
+  font-size:20px;font-weight:800;line-height:1.28;color:var(--w-ink);margin:0 0 12px;text-transform:uppercase;letter-spacing:.01em;
+}
+.dd-w4__h3 span{background:linear-gradient(180deg,transparent 60%,var(--w-yellow) 60%,var(--w-yellow) 96%,transparent 96%);}
+.dd-w4__p{font-size:15px;line-height:1.66;margin:0 0 10px;}
+.dd-w4__p strong{color:var(--w-ink);font-weight:700;}
+.dd-w4__list{margin:0;padding:0;list-style:none;}
+.dd-w4__list li{font-size:14.5px;line-height:1.6;padding:0 0 0 18px;position:relative;margin-bottom:6px;}
+.dd-w4__list li:before{content:"";position:absolute;left:0;top:10px;width:8px;height:2px;background:var(--w-red);}
+
+.dd-w4__foot{
+  margin-top:44px;background:#17150f;color:#fff;border-left:6px solid var(--w-red);
+  padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+}
+.dd-w4__foot p{margin:0;font-size:17px;font-weight:700;line-height:1.45;max-width:52ch;}
+.dd-w4__foot p em{font-style:normal;color:var(--w-yellow);}
+.dd-w4__cta{
+  display:inline-block;padding:17px 30px;text-decoration:none;flex:0 0 auto;
+  font-family:'Anton',Impact,sans-serif;font-size:19px;letter-spacing:.045em;text-transform:uppercase;
+  color:var(--w-ink);background:linear-gradient(180deg,var(--w-yellow),var(--w-yellow-dk));
+  border:2px solid #17150f;border-radius:2px;box-shadow:0 5px 0 rgba(0,0,0,.55);
+  transition:transform .06s ease, box-shadow .06s ease;
+}
+.dd-w4__cta:hover{transform:translateY(1px);box-shadow:0 4px 0 rgba(0,0,0,.55);}
+.dd-w4__cta:active{transform:translateY(5px);box-shadow:0 0 0 rgba(0,0,0,.55);}
+.dd-w4__disc{margin:20px 0 0;font-size:11.5px;line-height:1.7;color:var(--w-mut);}
+
+@media (max-width:900px){
+  .dd-w4{padding:52px 16px;}
+  .dd-w4__head{flex-direction:column;align-items:flex-start;gap:14px;}
+  .dd-w4__when{text-align:left;}
+  .dd-w4__grid{grid-template-columns:1fr;}
+  .dd-w4__c,.dd-w4__c:nth-child(even){padding:28px 0;border-left:0;padding-left:0;}
+  .dd-w4__c:nth-last-child(-n+2){border-bottom:1px solid var(--w-hair);}
+  .dd-w4__c:last-child{border-bottom:0;}
+  .dd-w4__cta{display:block;text-align:center;width:100%;}
+}
+</style>
+
+<section class="dd-w4">
+  <div class="dd-w4__wrap">
+
+    <div class="dd-w4__head">
+      <div>
+        <p class="dd-w4__eyebrow">Your 90 minute game plan</p>
+        <h2 class="dd-w4__h2">What you will learn live</h2>
+      </div>
+      <div class="dd-w4__when">Sunday, August 30<b>6:00 PM ET</b>90 min + live Q and A</div>
+    </div>
+
+    <div class="dd-w4__grid">
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">01</span>
+        <p class="dd-w4__tag">Mindset</p>
+        <h3 class="dd-w4__h3">How to stop trading from <span>emotion</span></h3>
+        <p class="dd-w4__p">Before we talk charts, we are talking about the trader behind the chart.</p>
+        <p class="dd-w4__p">Fear. Greed. Impatience. Revenge trading. Overconfidence. The need to make your money back on the very next trade.</p>
+        <p class="dd-w4__p"><strong>The shift is being willing to be wrong quickly instead of needing to be right.</strong></p>
+      </div>
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">02</span>
+        <p class="dd-w4__tag">The market</p>
+        <h3 class="dd-w4__h3">How DeMark trades the <span>Dow</span></h3>
+        <p class="dd-w4__p">US30 and YM. One market, watched closely, instead of ten markets watched badly.</p>
+        <ul class="dd-w4__list">
+          <li>Why he stopped jumping between instruments</li>
+          <li>What he is reading across multiple timeframes</li>
+          <li>What a normal session actually looks like on his screen</li>
+        </ul>
+      </div>
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">03</span>
+        <p class="dd-w4__tag">Setups</p>
+        <h3 class="dd-w4__h3">How to identify <span>high probability</span> setups</h3>
+        <p class="dd-w4__p">Not stock picks. Not signals. A repeatable checklist of what has to be on the screen before he is allowed to click.</p>
+        <p class="dd-w4__p">And just as important, what makes him sit on his hands and skip the trade.</p>
+      </div>
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">04</span>
+        <p class="dd-w4__tag">Exits</p>
+        <h3 class="dd-w4__h3">The exit rules that tell you <span>when to get out</span></h3>
+        <p class="dd-w4__p">Most accounts are not killed by bad entries. They are killed by holding losers too long and cutting winners too early.</p>
+        <p class="dd-w4__p"><strong>Every exit rule is written before the entry, not during it.</strong></p>
+      </div>
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">05</span>
+        <p class="dd-w4__tag">Risk</p>
+        <h3 class="dd-w4__h3">Risk and <span>wealth management</span></h3>
+        <p class="dd-w4__p">How much of the account goes into one trade, how position size is decided, and what happens after a losing day.</p>
+        <p class="dd-w4__p">Trading is the skill that can create cash flow. What you do with that cash flow afterwards is what builds something lasting.</p>
+      </div>
+
+      <div class="dd-w4__c">
+        <span class="dd-w4__n">06</span>
+        <p class="dd-w4__tag">Getting started</p>
+        <h3 class="dd-w4__h3">How someone can begin learning with <span>$300</span></h3>
+        <p class="dd-w4__p">DeMark recommends $300 to $500 to start. He will walk through what that account is realistically for.</p>
+        <p class="dd-w4__p"><strong>A small account is for learning the process. It is not for replacing income.</strong></p>
+      </div>
+
+    </div>
+
+    <div class="dd-w4__foot">
+      <p>He is also breaking down the thinking behind the session where he made $45,000 trading the Dow. <em>The money is not the lesson. The decisions before the result are.</em></p>
+      <a class="dd-w4__cta" href="#register">Save my free seat</a>
+    </div>
+
+    <p class="dd-w4__disc">
+      The $45,000 referenced was DeMark Davis's individual result from a single trading session. It is not typical and it is not guaranteed. Most people who attempt day trading lose money. Starting with $300 does not guarantee profitability. Trading futures and forex involves substantial risk of loss and is not suitable for everyone. This workshop is educational only and is not investment or financial advice.
+    </p>
+  </div>
+</section>

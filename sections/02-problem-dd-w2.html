@@ -1,0 +1,128 @@
+<!-- ============================================================
+     SECTION 2 - PROBLEM / PAIN POINT  (namespace: dd-w2)
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+<style>
+.dd-w2{
+  --w-bg:#f7f4ef; --w-card:#ffffff; --w-ink:#17150f; --w-body:#4c4740;
+  --w-mut:#7a746c; --w-hair:#e3ddd3; --w-red:#e02a20; --w-gold:#a8782c;
+  --w-yellow:#ffd400;
+  background:var(--w-bg);color:var(--w-body);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;padding:76px 20px;
+}
+.dd-w2 *{box-sizing:border-box;}
+.dd-w2__wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:start;}
+.dd-w2__eyebrow{
+  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--w-red);margin:0 0 16px;display:flex;align-items:center;gap:10px;
+}
+.dd-w2__eyebrow:after{content:"";flex:1;height:1px;background:var(--w-hair);}
+.dd-w2__h2{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(34px,4.4vw,58px);line-height:.95;text-transform:uppercase;
+  color:var(--w-ink);margin:0 0 10px;
+}
+.dd-w2__sub{
+  font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(28px,3.6vw,44px);color:var(--w-red);margin:0 0 30px;line-height:1;
+}
+.dd-w2__guess{list-style:none;margin:0 0 26px;padding:0;}
+.dd-w2__guess li{
+  padding:11px 0 11px 30px;border-bottom:1px solid var(--w-hair);position:relative;
+  font-size:16px;line-height:1.5;color:var(--w-ink);font-weight:500;
+}
+.dd-w2__guess li:before{
+  content:"";position:absolute;left:2px;top:19px;width:12px;height:2px;background:var(--w-red);
+}
+.dd-w2__guess li b{font-weight:800;}
+.dd-w2__p{font-size:16px;line-height:1.68;margin:0 0 14px;max-width:54ch;}
+.dd-w2__p strong{color:var(--w-ink);font-weight:700;}
+.dd-w2__hit{
+  margin:26px 0;padding:18px 22px;background:#17150f;color:#fff;border-left:6px solid var(--w-red);
+  font-size:17px;font-weight:700;line-height:1.45;
+}
+.dd-w2__hit em{font-style:normal;color:var(--w-yellow);}
+.dd-w2__close{
+  margin:30px 0 0;font-size:18px;font-weight:800;color:var(--w-ink);line-height:1.4;
+}
+.dd-w2__close span{
+  background:linear-gradient(180deg,transparent 58%,var(--w-yellow) 58%,var(--w-yellow) 95%,transparent 95%);
+}
+
+/* right column */
+.dd-w2__media{position:sticky;top:24px;}
+.dd-w2__photo{
+  position:relative;border:2px solid var(--w-ink);box-shadow:10px 10px 0 var(--w-ink);
+  overflow:hidden;background:var(--w-ink);
+}
+.dd-w2__photo img{display:block;width:100%;height:auto;filter:brightness(.8) saturate(.85);}
+.dd-w2__tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(168,120,44,.14),rgba(23,21,15,.4));}
+.dd-w2__quad{display:grid;grid-template-columns:1fr 1fr;margin-top:26px;border:2px solid var(--w-ink);background:var(--w-ink);gap:2px;}
+.dd-w2__q{background:var(--w-card);padding:20px 18px;}
+.dd-w2__q b{
+  display:block;font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:26px;
+  letter-spacing:.03em;color:var(--w-ink);margin-bottom:6px;
+}
+.dd-w2__q i{display:block;font-style:normal;font-size:13px;line-height:1.5;color:var(--w-mut);}
+.dd-w2__q--on{background:var(--w-yellow);}
+.dd-w2__q--on i{color:#5a5245;}
+.dd-w2__note{
+  margin:16px 0 0;font-size:12.5px;line-height:1.6;color:var(--w-mut);
+  padding-left:14px;border-left:2px solid var(--w-hair);
+}
+
+@media (max-width:900px){
+  .dd-w2{padding:52px 16px;}
+  .dd-w2__wrap{grid-template-columns:1fr;gap:34px;}
+  .dd-w2__media{position:static;}
+  .dd-w2__photo{box-shadow:7px 7px 0 var(--w-ink);}
+}
+@media (max-width:460px){
+  .dd-w2__quad{grid-template-columns:1fr;}
+  .dd-w2__hit{font-size:16px;padding:16px 18px;}
+}
+</style>
+
+<section class="dd-w2">
+  <div class="dd-w2__wrap">
+    <div>
+      <p class="dd-w2__eyebrow">Why most traders stay stuck</p>
+      <h2 class="dd-w2__h2">The market is not your biggest problem.</h2>
+      <p class="dd-w2__sub">Guessing is.</p>
+
+      <ul class="dd-w2__guess">
+        <li>Guessing <b>when to enter</b>.</li>
+        <li>Guessing <b>how much to risk</b>.</li>
+        <li>Guessing <b>whether you should hold</b>.</li>
+        <li>Guessing <b>whether you should get out</b>.</li>
+        <li>Taking a trade because something looked good.</li>
+        <li>Watching five different markets because somebody online said they were moving.</li>
+        <li>Adding another indicator every time the last strategy does not work.</li>
+      </ul>
+
+      <div class="dd-w2__hit">And when real money is involved? <em>Guessing gets expensive.</em></div>
+
+      <p class="dd-w2__p">Successful trading is not about predicting every move the market will make.</p>
+      <p class="dd-w2__p"><strong>It is about having rules for what you will do when the market moves.</strong></p>
+
+      <p class="dd-w2__close">That is what DeMark is teaching on <span>August 30</span>.</p>
+    </div>
+
+    <div class="dd-w2__media">
+      <figure class="dd-w2__photo">
+        <img src="https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/69da8b20b30bc52371f34113.jpeg" alt="DeMark Davis working through charts">
+        <span class="dd-w2__tint"></span>
+      </figure>
+
+      <div class="dd-w2__quad">
+        <div class="dd-w2__q dd-w2__q--on"><b>ENTRY</b><i>What has to be on the screen before you are allowed to click.</i></div>
+        <div class="dd-w2__q"><b>RISK</b><i>The number you decide to lose before you are in the trade.</i></div>
+        <div class="dd-w2__q"><b>HOLD</b><i>What keeps you in a trade that is working.</i></div>
+        <div class="dd-w2__q dd-w2__q--on"><b>EXIT</b><i>What tells you it is time to get out, win or lose.</i></div>
+      </div>
+
+      <p class="dd-w2__note">Four decisions. Most traders only have a plan for the first one.</p>
+    </div>
+  </div>
+</section>

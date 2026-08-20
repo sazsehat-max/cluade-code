@@ -1,0 +1,163 @@
+<!-- ============================================================
+     SECTION 3 - THE METHOD  (namespace: dd-w3)
+     Replace [DOW CHART IMAGE URL] with a real US30 / YM chart screenshot.
+     If no real chart is available yet, delete the <img> line and the
+     drawn placeholder chart below it will show on its own.
+     ============================================================ -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<style>
+.dd-w3{
+  --w-bg:#f7f4ef; --w-card:#ffffff; --w-ink:#17150f; --w-body:#4c4740;
+  --w-mut:#7a746c; --w-hair:#e3ddd3; --w-red:#e02a20; --w-gold:#a8782c;
+  --w-yellow:#ffd400; --w-yellow-dk:#f5b700;
+  background:var(--w-bg);color:var(--w-body);
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;padding:76px 20px;overflow:hidden;
+}
+.dd-w3 *{box-sizing:border-box;}
+.dd-w3__wrap{max-width:1180px;margin:0 auto;}
+.dd-w3__eyebrow{
+  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--w-gold);margin:0 0 14px;
+}
+.dd-w3__h2{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(32px,4.6vw,60px);line-height:.95;text-transform:uppercase;
+  color:var(--w-ink);margin:0 0 40px;max-width:20ch;
+}
+.dd-w3__h2 span{color:var(--w-red);}
+
+/* oversized ticker band */
+.dd-w3__band{
+  border-top:2px solid var(--w-ink);border-bottom:2px solid var(--w-ink);
+  padding:14px 0;margin:0 0 44px;overflow:hidden;white-space:nowrap;
+}
+.dd-w3__band b{
+  font-family:'Anton',Impact,sans-serif;font-weight:400;
+  font-size:clamp(38px,7vw,86px);line-height:1;letter-spacing:.02em;
+  color:var(--w-ink);margin-right:34px;
+}
+.dd-w3__band b:nth-child(even){
+  color:transparent;-webkit-text-stroke:1.5px var(--w-ink);
+}
+.dd-w3__band i{color:var(--w-red);font-style:normal;}
+
+.dd-w3__grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center;}
+.dd-w3__p{font-size:16.5px;line-height:1.68;margin:0 0 16px;max-width:52ch;}
+.dd-w3__p strong{color:var(--w-ink);font-weight:700;}
+.dd-w3__ask{font-family:'Caveat',cursive;font-size:26px;color:var(--w-gold);margin:0 0 4px;}
+.dd-w3__focus{
+  font-family:'Anton',Impact,sans-serif;font-size:44px;line-height:1;color:var(--w-ink);
+  margin:0 0 6px;text-transform:uppercase;
+}
+.dd-w3__tick{
+  font-size:13px;font-weight:700;letter-spacing:.22em;color:var(--w-mut);margin:0 0 24px;
+}
+.dd-w3__cta{
+  display:inline-block;margin-top:12px;padding:17px 30px;cursor:pointer;text-decoration:none;
+  font-family:'Anton',Impact,sans-serif;font-size:19px;letter-spacing:.045em;text-transform:uppercase;
+  color:var(--w-ink);background:linear-gradient(180deg,var(--w-yellow),var(--w-yellow-dk));
+  border:2px solid var(--w-ink);border-radius:2px;box-shadow:0 5px 0 var(--w-ink);
+  transition:transform .06s ease, box-shadow .06s ease;
+}
+.dd-w3__cta:hover{transform:translateY(1px);box-shadow:0 4px 0 var(--w-ink);}
+.dd-w3__cta:active{transform:translateY(5px);box-shadow:0 0 0 var(--w-ink);}
+.dd-w3__ctan{margin:12px 0 0;font-size:12px;font-weight:600;color:var(--w-mut);}
+
+/* chart panel */
+.dd-w3__panel{
+  background:var(--w-card);border:2px solid var(--w-ink);box-shadow:10px 10px 0 var(--w-ink);
+  padding:0;overflow:hidden;
+}
+.dd-w3__phead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 16px;background:#17150f;color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+}
+.dd-w3__phead em{font-style:normal;color:#b7b0a5;}
+.dd-w3__pbody{padding:16px;background:#fdfcfa;}
+.dd-w3__pbody img{display:block;width:100%;height:auto;border:1px solid var(--w-hair);}
+.dd-w3__svg{display:block;width:100%;height:auto;}
+.dd-w3__legend{
+  display:flex;flex-wrap:wrap;gap:18px;padding:14px 16px;border-top:1px solid var(--w-hair);
+  font-size:12px;font-weight:600;color:var(--w-body);background:var(--w-card);
+}
+.dd-w3__legend span{display:flex;align-items:center;gap:7px;}
+.dd-w3__key{width:11px;height:11px;border:1.5px solid var(--w-ink);}
+.dd-w3__key--in{background:var(--w-yellow);}
+.dd-w3__key--out{background:var(--w-red);}
+.dd-w3__key--stop{background:#fff;}
+.dd-w3__cap{margin:14px 0 0;font-size:11.5px;line-height:1.65;color:var(--w-mut);}
+
+@media (max-width:900px){
+  .dd-w3{padding:52px 16px;}
+  .dd-w3__grid{grid-template-columns:1fr;gap:34px;}
+  .dd-w3__h2{margin-bottom:26px;}
+  .dd-w3__band{margin-bottom:30px;}
+  .dd-w3__panel{box-shadow:7px 7px 0 var(--w-ink);}
+  .dd-w3__focus{font-size:36px;}
+  .dd-w3__cta{display:block;text-align:center;}
+}
+</style>
+
+<section class="dd-w3">
+  <div class="dd-w3__wrap">
+    <p class="dd-w3__eyebrow">Simplify your approach</p>
+    <h2 class="dd-w3__h2">One market. A handful of setups. <span>Clear rules.</span></h2>
+
+    <div class="dd-w3__band">
+      <b>THE DOW</b><b>US30</b><b><i>YM</i></b><b>THE DOW</b><b>US30</b>
+    </div>
+
+    <div class="dd-w3__grid">
+      <div>
+        <p class="dd-w3__p">DeMark does not believe you need to chase everything moving across the financial markets.</p>
+        <p class="dd-w3__ask">His focus?</p>
+        <p class="dd-w3__focus">The Dow.</p>
+        <p class="dd-w3__tick">US30 . YM</p>
+        <p class="dd-w3__p">During this 90 minute workshop you will see how he approaches <strong>one market</strong> instead of jumping between dozens of instruments, and how knowing one market well can help you make more structured trading decisions.</p>
+        <a class="dd-w3__cta" href="#register">I am ready to learn the market</a>
+        <p class="dd-w3__ctan">Sunday, August 30 at 6:00 PM ET. Free. 90 minutes plus live Q and A.</p>
+      </div>
+
+      <div>
+        <div class="dd-w3__panel">
+          <div class="dd-w3__phead"><span>US30 / YM</span><em>Setup, entry, exit</em></div>
+          <div class="dd-w3__pbody">
+            <img src="[DOW CHART IMAGE URL]" alt="Dow US30 chart with entry and exit marked" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <svg class="dd-w3__svg" style="display:none" viewBox="0 0 560 300" fill="none" aria-hidden="true">
+              <g stroke="#e3ddd3" stroke-width="1">
+                <path d="M0 50H560M0 100H560M0 150H560M0 200H560M0 250H560"/>
+              </g>
+              <g stroke="#17150f" stroke-width="1.6">
+                <path d="M40 150V225"/><path d="M80 140V215"/><path d="M120 165V240"/><path d="M160 130V205"/>
+                <path d="M200 145V210"/><path d="M240 105V180"/><path d="M280 120V185"/><path d="M320 85V160"/>
+                <path d="M360 100V165"/><path d="M400 60V140"/><path d="M440 80V150"/><path d="M480 45V120"/>
+              </g>
+              <g fill="#e02a20">
+                <rect x="34" y="180" width="12" height="30"/><rect x="114" y="195" width="12" height="32"/>
+                <rect x="194" y="168" width="12" height="28"/><rect x="274" y="142" width="12" height="28"/>
+                <rect x="354" y="122" width="12" height="28"/><rect x="434" y="100" width="12" height="28"/>
+              </g>
+              <g fill="#17150f">
+                <rect x="74" y="158" width="12" height="34"/><rect x="154" y="148" width="12" height="34"/>
+                <rect x="234" y="124" width="12" height="34"/><rect x="314" y="104" width="12" height="34"/>
+                <rect x="394" y="78" width="12" height="34"/><rect x="474" y="62" width="12" height="34"/>
+              </g>
+              <path d="M20 196H540" stroke="#a8782c" stroke-width="1.5" stroke-dasharray="6 6"/>
+              <rect x="150" y="176" width="26" height="20" fill="#ffd400" stroke="#17150f" stroke-width="2"/>
+              <rect x="466" y="52" width="26" height="20" fill="#e02a20" stroke="#17150f" stroke-width="2"/>
+              <path d="M20 232H540" stroke="#17150f" stroke-width="1.5" stroke-dasharray="3 5"/>
+            </svg>
+          </div>
+          <div class="dd-w3__legend">
+            <span><i class="dd-w3__key dd-w3__key--in"></i> Entry</span>
+            <span><i class="dd-w3__key dd-w3__key--out"></i> Exit</span>
+            <span><i class="dd-w3__key dd-w3__key--stop"></i> Risk decided first</span>
+          </div>
+        </div>
+        <p class="dd-w3__cap">Chart shown for teaching purposes. Past price action does not predict future results. Trading futures and forex involves substantial risk of loss and is not suitable for everyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
