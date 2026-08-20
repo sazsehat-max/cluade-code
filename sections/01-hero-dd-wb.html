@@ -161,44 +161,99 @@
 
 /* ---------- tablet ---------- */
 @media (max-width:1080px){
+  .dd-wb{min-height:auto; padding:60px 0 48px;}
   .dd-wb__wrap{grid-template-columns:1fr; gap:34px;}
-  .dd-wb__rail{justify-self:start; width:min(430px,100%);}
-  .dd-wb__bg{width:100%; inset:0;}
-  .dd-wb__bg img{
-    object-position:66% 16%;
-    -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.35) 42%, transparent 66%);
-    mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.35) 42%, transparent 66%);
-    -webkit-mask-composite:source-over; mask-composite:add;
-  }
-  .dd-wb__wash{width:100%; background:linear-gradient(to bottom, rgba(247,244,239,.55), var(--w-bg) 55%);}
+  .dd-wb__rail{justify-self:start; width:min(460px,100%);}
+  .dd-wb__bg{width:52%;}
+  .dd-wb__bg img{object-position:60% 16%;}
 }
 
 /* ---------- mobile ---------- */
 @media (max-width:760px){
-  .dd-wb{min-height:auto; padding:0 0 40px; display:block;}
-  .dd-wb__grid{display:none;}
-  .dd-wb__bg{position:relative; width:100%; height:46vh; min-height:280px; inset:auto;}
-  .dd-wb__bg img{
-    object-position:62% 12%;
-    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 52%, transparent 97%);
-    mask-image:linear-gradient(to bottom, #000 0%, #000 52%, transparent 97%);
+  .dd-wb{
+    min-height:auto; display:block; padding:0 0 34px; overflow-x:hidden;
+    background:linear-gradient(180deg,#fbfaf6 0%, var(--w-bg) 40%, #f1ece3 100%);
   }
-  .dd-wb__wash{position:absolute; top:0; height:46vh; min-height:280px; width:100%;
-    background:linear-gradient(to bottom, rgba(247,244,239,.15), rgba(247,244,239,.9) 82%);}
-  .dd-wb__wrap{padding:0 18px; margin-top:-52px; position:relative; z-index:1;}
-  .dd-wb__h1{font-size:clamp(36px,11vw,56px);}
-  .dd-wb__lead,.dd-wb__h2{max-width:none;}
-  .dd-wb__bar{border-radius:10px 10px 0 0; flex-wrap:wrap;}
-  .dd-wb__bar div{flex:1 1 50%; border-bottom:1px solid rgba(255,255,255,.12);}
-  .dd-wb__bar div:nth-child(2){border-right:0;}
-  .dd-wb__form{padding:20px 18px 18px;}
-  .dd-wb__disc{position:static; padding:22px 18px 0; background:none;}
+  .dd-wb__grid{display:none;}
+
+  /* photo becomes a fixed-height banner, cropped to his face, fading down */
+  .dd-wb__bg{
+    position:relative; inset:auto; width:100%; height:300px; z-index:0;
+  }
+  .dd-wb__bg img{
+    height:100%; object-position:50% 14%;
+    filter:brightness(.97) contrast(.97) saturate(.85);
+    -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,.55) 74%, transparent 100%);
+    mask-image:linear-gradient(to bottom, #000 0%, #000 46%, rgba(0,0,0,.55) 74%, transparent 100%);
+    -webkit-mask-composite:source-over; mask-composite:add;
+  }
+  .dd-wb__wash{
+    position:absolute; top:0; left:0; width:100%; height:300px; z-index:1;
+    background:linear-gradient(180deg, rgba(247,244,239,.05) 0%, rgba(247,244,239,.18) 55%, var(--w-bg) 99%);
+  }
+
+  /* eyebrow floats on the photo, everything else sits on clean ground */
+  .dd-wb__wrap{
+    position:relative; z-index:2; display:block;
+    padding:0 20px; margin-top:-26px;
+  }
+  .dd-wb__col{max-width:none;}
+  .dd-wb__eyebrow{
+    margin:0 0 16px; font-size:11px; padding:8px 15px 8px 12px;
+    background:#fff; box-shadow:0 6px 18px -8px rgba(23,21,15,.4);
+  }
+  .dd-wb__h1{font-size:clamp(38px,11.5vw,58px); line-height:.92; margin-bottom:18px;}
+  .dd-wb__h2{font-size:18px; line-height:1.4; margin-bottom:14px; max-width:none;}
+  .dd-wb__lead{font-size:16px; line-height:1.65; max-width:none; margin-bottom:14px;}
+  .dd-wb__ask{font-size:22px; margin:20px 0 2px;}
+
+  /* proof chips: two up, then full width */
+  .dd-wb__proof{gap:8px; margin-top:22px;}
+  .dd-wb__pc{
+    flex:1 1 calc(50% - 4px); justify-content:flex-start; gap:8px;
+    padding:12px 14px; border-radius:12px; background:#fff;
+  }
+  .dd-wb__pc b{font-size:21px;}
+  .dd-wb__pc span{font-size:9.5px; letter-spacing:.1em; line-height:1.2;}
+  .dd-wb__pc:nth-child(3){flex:1 1 100%;}
+
+  /* rail becomes the closing block, full width, clearly the action */
+  .dd-wb__rail{width:100%; margin-top:28px;}
+  .dd-wb__bar{
+    border-radius:14px 14px 0 0; border-left:0; border-top:4px solid var(--w-red);
+    display:grid; grid-template-columns:1fr 1fr;
+  }
+  .dd-wb__bar div{padding:11px 8px; border-bottom:1px solid rgba(255,255,255,.12);}
+  .dd-wb__bar div:nth-child(2n){border-right:0;}
+  .dd-wb__bar div:nth-child(n+3){border-bottom:0;}
+  .dd-wb__bar small{font-size:9px;}
+  .dd-wb__bar b{font-size:13px;}
+
+  .dd-wb__form{
+    border-radius:0 0 14px 14px; padding:22px 18px 18px; background:#fff;
+    box-shadow:0 18px 40px -20px rgba(23,21,15,.4);
+  }
+  .dd-wb__ftitle{font-size:13px;}
+  .dd-wb input{font-size:16px; padding:15px 15px; border-radius:10px;} /* 16px stops iOS zoom */
+  .dd-wb__btn{font-size:21px; padding:19px 18px; border-radius:12px;}
+  .dd-wb__micro{font-size:11px;}
+  .dd-wb__name{margin-top:16px; font-size:10.5px;}
+
+  .dd-wb__disc{
+    position:static; padding:26px 20px 0; background:none; text-align:left;
+    font-size:10.5px; line-height:1.7;
+  }
 }
-@media (max-width:420px){
+
+/* very small phones */
+@media (max-width:400px){
+  .dd-wb__bg,.dd-wb__wash{height:255px;}
   .dd-wb__row{grid-template-columns:1fr;}
-  .dd-wb__btn{font-size:18px;}
   .dd-wb__pc{flex:1 1 100%;}
+  .dd-wb__h1{font-size:36px;}
+  .dd-wb__btn{font-size:19px;}
 }
+
 @media (prefers-reduced-motion:reduce){.dd-wb__dot{animation:none;}}
 </style>
 
