@@ -1,60 +1,62 @@
 # Market Titans: Day Trading Warrior course page
 
-Next.js landing page for the course, hosted on Cloudflare Workers. Payments go through Stripe, and every buyer is synced to GoHighLevel (GHL) so your GHL workflow sends the course access link automatically.
+Next.js landing page for the course, hosted on Cloudflare Workers. It supports two ways to take payment:
 
-## How it works
+| Mode | When it's used | Needs |
+|---|---|---|
+| **GHL checkout** (default) | `STRIPE_SECRET_KEY` is **not** set | Two GHL order pages. No Stripe access at all |
+| Stripe Checkout (optional) | `STRIPE_SECRET_KEY` is set | Stripe secret key + webhook |
+
+## GHL checkout mode (no Stripe key needed)
 
 ```
-Visitor applies code TITAN25 ── $1,600 → $1,200 (checked on the server)
+Visitor applies code TITAN25 ── page shows $1,600 → $1,200 (checked on the server)
         │
         ▼
 Enrollment ticket (name, email, phone)
         │  /api/checkout
         ├──► GHL: create/update contact + tag "course-checkout-started"   (abandoned-checkout follow-up)
-        └──► Stripe Checkout (shows $1,600, TITAN25 −$400, total $1,200)
-                    │ payment succeeds
+        └──► redirect to the GHL order page for that price, name/email/phone pre-filled
+                 no code  → order page priced $1,600
+                 TITAN25  → order page priced $1,200 (with $1,600 shown as "compare at")
+                    │ GHL charges the card through the Stripe account already connected to GHL
                     ▼
-        Stripe webhook → /api/stripe/webhook
-                    ├──► GHL: tag "course-purchased-web" + "course buyer", remove "course-checkout-started"
-                    ├──► GHL: note with amount, coupon and Stripe IDs
-                    └──► (optional) GHL: won opportunity in a pipeline
-                    ▼
-        GHL workflow (trigger: tag "course-purchased-web") emails the course access link
+        GHL workflow (trigger: Order Submitted / Payment Received) emails the course access link
 ```
 
-The buyer lands on `/thank-you`, which confirms the payment and tells them to check their email.
+Money lands exactly where GHL payments land today. Nobody needs the Stripe key.
 
-## Setup checklist
+### Setup in GHL
 
-### 1. Stripe (where the money goes)
-
-Use the **same Stripe account that's connected to GHL** (GHL → Payments → Integrations), so payouts arrive exactly as they do today.
-
-1. Stripe Dashboard → Developers → API keys → copy the **Secret key** (`sk_live_…`; use `sk_test_…` while testing).
-2. Stripe Dashboard → Developers → Webhooks → **Add endpoint**
-   - URL: `https://YOUR-DOMAIN/api/stripe/webhook`
-   - Events: `checkout.session.completed` and `checkout.session.async_payment_succeeded`
-   - Copy the **Signing secret** (`whsec_…`).
-3. Optional: Settings → Payment methods → turn on Apple Pay / Google Pay (and Klarna/Afterpay if you want pay-in-installments; Checkout shows them automatically).
-
-The page creates the Stripe coupon (`MT_TITAN25_25`) by itself the first time someone uses the code.
-
-### 2. GHL
-
-1. **Private Integration for the website**: Settings → Private Integrations → Create. Scopes: *View/Edit Contacts* (and *Edit Opportunities* if you want the optional pipeline entry). Copy the token. Keep it separate from your main token.
-2. **Access workflow** (Automation → Workflows → Create):
-   - Trigger: **Contact Tag** → Tag added → `course-purchased-web`
-   - Action: **Send Email** with the course login link and the Telegram invite. If the course lives in GHL Memberships, use **Grant Offer** instead (it emails the login automatically), then send the Telegram invite.
-   - Optional: Send SMS "Your access email is on its way."
-   - Publish it.
-3. **Abandoned checkout workflow** (recommended):
+1. **Product** (Payments → Products): "Day Trading Warrior Course" with two one-time prices:
+   - `Full price` — $1,600
+   - `TITAN25` — $1,200, with *compare at price* $1,600 so the order page shows the strikethrough
+2. **Two order pages** (Sites → Funnels). Duplicate your existing "Course Order Form" funnel twice:
+   - Full-price checkout: order form with the $1,600 price
+   - TITAN25 checkout: order form with the $1,200 price
+   - On each order form, keep the field names *first_name*, *email* and *phone* so the details from the course page pre-fill.
+   - Set the thank-you step to redirect to `https://YOUR-DOMAIN/thank-you` (or keep a GHL thank-you page).
+3. **Optional fallback coupon** (Payments → Coupons): `TITAN25`, 25% off, on the full-price product, in case someone lands on the full-price page and types the code there.
+4. **Access workflow** (Automation → Workflows):
+   - Trigger: **Order Submitted** (filter: the two checkout pages) or **Payment Received** (filter: the course product)
+   - Actions: add tags `course-purchased-web` and `course buyer`, remove tag `course-checkout-started`, then **Send Email** with the course login + Telegram invite (or **Grant Offer** if the course is in GHL Memberships).
+5. **Abandoned checkout workflow** (recommended):
    - Trigger: Contact Tag added → `course-checkout-started`
    - Wait 1 hour → If/Else: contact has tag `course-purchased-web` → end
-   - Else: send email/SMS with the link `https://YOUR-DOMAIN/?code=TITAN25#enroll` (the code applies itself from the link).
+   - Else: email/SMS the link `https://YOUR-DOMAIN/?code=TITAN25#enroll`
+6. Put the two order page URLs in the `CHECKOUT_LINKS` variable (see Cloudflare below):
+   ```json
+   {"default":"https://course-offer.demarkettitans.com/<full-price-page>","TITAN25":"https://course-offer.demarkettitans.com/<titan25-page>"}
+   ```
+   Add one entry per extra coupon code, each pointing to an order page with that price.
 
-> Use the new `course-purchased-web` tag as the trigger, not `course buyer`. The page adds both, but `course buyer` may already be wired to older workflows.
+> Someone could open the TITAN25 order page directly without entering the code. That's the trade-off of not having the Stripe key; it's the same exposure as publishing the code in the banner.
 
-### 3. Cloudflare
+## Stripe mode (optional, if you ever get a key)
+
+Set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`, and the page uses Stripe Checkout instead: Stripe shows $1,600, the TITAN25 line and $1,200, and the webhook at `/api/stripe/webhook` (events `checkout.session.completed` and `checkout.session.async_payment_succeeded`) tags the buyer `course-purchased-web` in GHL. Your client can paste the key into Cloudflare themselves, so you never see it. A restricted key with write access to *Checkout Sessions* and *Coupons* is enough.
+
+### Cloudflare
 
 **Option A: automatic deploys from GitHub (recommended)**
 Cloudflare Dashboard → Workers & Pages → Create → Import a repository → pick this repo.
@@ -71,30 +73,29 @@ npx wrangler login
 npm run deploy
 ```
 
-**Secrets** (Worker → Settings → Variables and Secrets, or the CLI):
+**Secret** (Worker → Settings → Variables and Secrets, or the CLI):
 ```bash
-npx wrangler secret put STRIPE_SECRET_KEY
-npx wrangler secret put STRIPE_WEBHOOK_SECRET
 npx wrangler secret put GHL_API_KEY
 ```
-`GHL_LOCATION_ID` and `NEXT_PUBLIC_SITE_URL` are plain variables in `wrangler.jsonc`. Update the site URL to your real domain.
+(Stripe mode only: also `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`.)
+
+**Plain variables** in `wrangler.jsonc`: `GHL_LOCATION_ID`, `NEXT_PUBLIC_SITE_URL` (your real domain) and `CHECKOUT_LINKS` (your two GHL order page URLs).
 
 **Custom domain**: Worker → Settings → Domains & Routes → Add custom domain (e.g. `course.demarkettitans.com`).
 
-### 4. Test before going live
+### 3. Test before going live
 
-1. Use Stripe **test** keys and a test webhook endpoint.
-2. Open the page with `?code=TITAN25`, fill the ticket, pay with card `4242 4242 4242 4242`, any future date, any CVC.
-3. Check: the thank-you page shows your name, the GHL contact has the `course-purchased-web` tag and a note, and the access email arrived.
-4. Swap in live keys.
+1. Open the page with `?code=TITAN25`, fill the ticket and continue: you should land on the $1,200 GHL order page with your details filled in.
+2. Without a code you should land on the $1,600 page.
+3. In GHL, check the contact got the `course-checkout-started` tag, then place a test order (GHL test mode or a 100% test coupon) and confirm the access email arrives.
 
 ## Changing price or coupons
 
-- List price: `listPriceCents` in `src/lib/offer.ts`.
+- List price: `listPriceCents` in `src/lib/offer.ts` (and the matching GHL product price).
 - Coupons: `DEFAULT_COUPONS` in `src/lib/offer.ts`, or set a `COUPONS` variable on Cloudflare without redeploying code, e.g. `{"TITAN25":25,"VIP40":40}`.
 - Sharing a link with the code pre-applied: `https://YOUR-DOMAIN/?code=TITAN25`.
 
-The browser never decides the price. The server recalculates it on checkout, so editing the page can't change what someone pays.
+The browser never decides the price: the server validates the code and picks the checkout. In GHL mode the final amount is whatever price the GHL order page charges, so keep the page prices and the code percentages in sync.
 
 ## Editing copy and media
 

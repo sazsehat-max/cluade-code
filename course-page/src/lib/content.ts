@@ -141,7 +141,7 @@ export const FAQ = [
   },
   {
     q: "How do I use a coupon code?",
-    a: "Type your code in the enrollment ticket and press Apply. You'll see the discount and your new total before you go to checkout, and it carries through to the payment page.",
+    a: "Type your code in the enrollment ticket and press Apply. You'll see the discount and your new total before you continue, and the payment page shows the same discounted price.",
   },
   {
     q: "How long do I have access?",
@@ -161,7 +161,7 @@ export const FAQ = [
   },
   {
     q: "How do I pay?",
-    a: "Checkout is handled by Stripe, so your card details never touch our site. You can pay by card, and by Apple Pay or Google Pay where your device supports it.",
+    a: "Checkout runs on a secure, encrypted payment page, so your card details never touch this site. All major cards are accepted.",
   },
   {
     q: "Will this guarantee I become profitable?",

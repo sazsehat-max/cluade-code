@@ -254,7 +254,7 @@ export default function OrderTicket() {
         <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
           <path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7Z" />
         </svg>
-        Payment handled by Stripe. Card, Apple Pay and Google Pay. Access emailed instantly.
+        Secure, encrypted checkout. Access emailed instantly after payment.
       </p>
     </form>
   );

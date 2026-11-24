@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { OFFER, quote } from "@/lib/offer";
 import { ensureStripeCoupon, siteUrl, stripe } from "@/lib/stripe";
 import { TAGS, addTags, upsertContact } from "@/lib/ghl";
+import { ghlCheckoutUrl, paymentMode } from "@/lib/checkoutLinks";
 
 type Body = { firstName?: string; email?: string; phone?: string; code?: string; utm?: Record<string, string> };
 
@@ -29,12 +30,23 @@ export async function POST(req: Request) {
     console.error("GHL lead capture failed (continuing to checkout):", err);
   }
 
-  // 2) Create the Stripe Checkout session.
   const utm = Object.fromEntries(
     Object.entries(body.utm ?? {})
       .filter(([k]) => /^utm_(source|medium|campaign|content|term)$|^fbclid$/.test(k))
       .map(([k, v]) => [k, String(v).slice(0, 200)]),
   );
+
+  // 2a) GHL mode: send the buyer to the GHL order page for their price. GHL charges through its own Stripe connection.
+  if (paymentMode() === "ghl") {
+    const url = ghlCheckoutUrl(q.code, { firstName, email, phone }, utm);
+    if (!url) {
+      console.error("CHECKOUT_LINKS is not configured");
+      return NextResponse.json({ error: "Checkout isn't available right now. Try again shortly." }, { status: 503 });
+    }
+    return NextResponse.json({ url });
+  }
+
+  // 2b) Stripe mode: create a Stripe Checkout session.
   try {
     const origin = siteUrl(req);
     const discounts = q.code ? [{ coupon: await ensureStripeCoupon(q.code, q.percentOff) }] : undefined;
