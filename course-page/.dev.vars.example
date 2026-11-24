@@ -1,0 +1,11 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+STRIPE_SECRET_KEY=sk_test_xxx
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+GHL_API_KEY=pit-xxx
+GHL_LOCATION_ID=DYG4MhubhMu6t5fWQcS3
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+# Optional: also create a won opportunity in a GHL pipeline for each sale
+# GHL_PIPELINE_ID=
+# GHL_PIPELINE_STAGE_ID=
+# Optional: override the coupon list, as JSON {"CODE": percentOff}
+# COUPONS={"TITAN25":25}
