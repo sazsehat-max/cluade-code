@@ -1,19 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "market-titans-course",
-  "main": ".open-next/worker.js",
+  "pages_build_output_dir": "out",
   "compatibility_date": "2026-11-01",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-  "observability": { "enabled": true },
-  // Plain (non-secret) settings. Secrets are added with `wrangler secret put` (see README).
   "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://course.demarkettitans.com",
     "GHL_LOCATION_ID": "DYG4MhubhMu6t5fWQcS3",
-    // GHL checkout mode: one GHL order page per price. Used when STRIPE_SECRET_KEY is not set.
     "CHECKOUT_LINKS": "{\"default\":\"https://course-offer.demarkettitans.com/course-checkout\",\"TITAN25\":\"https://course-offer.demarkettitans.com/course-checkout-titan25\"}"
   }
+  // Secret (set in the dashboard or with `wrangler pages secret put GHL_API_KEY`): GHL_API_KEY
 }

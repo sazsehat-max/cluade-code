@@ -1,13 +1,12 @@
 import type { NextConfig } from "next";
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const nextConfig: NextConfig = {
-  // Images are served from GHL's CDN, which already resizes them.
+  // Static export: the page is plain HTML/CSS/JS served by Cloudflare Pages.
+  // The two API endpoints live in /functions as Cloudflare Pages Functions.
+  output: "export",
   images: { unoptimized: true },
+  trailingSlash: false,
   poweredByHeader: false,
 };
 
 export default nextConfig;
-
-// Makes Cloudflare bindings and .dev.vars available during `next dev`.
-initOpenNextCloudflareForDev();
