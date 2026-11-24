@@ -14,6 +14,6 @@
     "NEXT_PUBLIC_SITE_URL": "https://course.demarkettitans.com",
     "GHL_LOCATION_ID": "DYG4MhubhMu6t5fWQcS3",
     // GHL checkout mode: one GHL order page per price. Used when STRIPE_SECRET_KEY is not set.
-    "CHECKOUT_LINKS": "{\"default\":\"https://course-offer.demarkettitans.com/REPLACE-full-price-checkout\",\"TITAN25\":\"https://course-offer.demarkettitans.com/REPLACE-titan25-checkout\"}"
+    "CHECKOUT_LINKS": "{\"default\":\"https://course-offer.demarkettitans.com/course-checkout\",\"TITAN25\":\"https://course-offer.demarkettitans.com/course-checkout-titan25\"}"
   }
 }

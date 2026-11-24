@@ -30,7 +30,8 @@ export function ghlCheckoutUrl(
   const base = (code && links[code]) || links.default;
   if (!base) return null;
   const url = new URL(base);
-  // GHL pre-fills order form fields whose names match these keys.
+  // GHL pre-fills its order form from these keys (verified on the live pages: Full Name reads `full_name`).
+  url.searchParams.set("full_name", buyer.firstName);
   url.searchParams.set("first_name", buyer.firstName);
   url.searchParams.set("email", buyer.email);
   if (buyer.phone) url.searchParams.set("phone", buyer.phone);

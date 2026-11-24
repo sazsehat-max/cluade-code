@@ -2,7 +2,7 @@
 # Payment mode: leave the Stripe keys out to use GHL order pages (CHECKOUT_LINKS) instead.
 # STRIPE_SECRET_KEY=sk_test_xxx
 # STRIPE_WEBHOOK_SECRET=whsec_xxx
-CHECKOUT_LINKS={"default":"https://course-offer.demarkettitans.com/full-price-checkout","TITAN25":"https://course-offer.demarkettitans.com/titan25-checkout"}
+CHECKOUT_LINKS={"default":"https://course-offer.demarkettitans.com/course-checkout","TITAN25":"https://course-offer.demarkettitans.com/course-checkout-titan25"}
 GHL_API_KEY=pit-xxx
 GHL_LOCATION_ID=DYG4MhubhMu6t5fWQcS3
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
