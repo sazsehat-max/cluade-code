@@ -56,7 +56,7 @@ Money lands exactly where GHL payments land today. Nobody needs the Stripe key.
 
 Set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`, and the page uses Stripe Checkout instead: Stripe shows $1,600, the TITAN25 line and $1,200, and the webhook at `/api/stripe/webhook` (events `checkout.session.completed` and `checkout.session.async_payment_succeeded`) tags the buyer `course-purchased-web` in GHL. Your client can paste the key into Cloudflare themselves, so you never see it. A restricted key with write access to *Checkout Sessions* and *Coupons* is enough.
 
-### Cloudflare
+## Cloudflare
 
 **Option A: automatic deploys from GitHub (recommended)**
 Cloudflare Dashboard → Workers & Pages → Create → Import a repository → pick this repo.
@@ -83,7 +83,7 @@ npx wrangler secret put GHL_API_KEY
 
 **Custom domain**: Worker → Settings → Domains & Routes → Add custom domain (e.g. `course.demarkettitans.com`).
 
-### 3. Test before going live
+## Test before going live
 
 1. Open the page with `?code=TITAN25`, fill the ticket and continue: you should land on the $1,200 GHL order page with your details filled in.
 2. Without a code you should land on the $1,600 page.
