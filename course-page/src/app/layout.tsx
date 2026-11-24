@@ -1,11 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Big_Shoulders, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+// Fonts are bundled with the site (no Google Fonts request at build or page load).
+import "@fontsource/big-shoulders-display/latin-700";
+import "@fontsource/big-shoulders-display/latin-800";
+import "@fontsource/big-shoulders-display/latin-900";
+import "@fontsource-variable/hanken-grotesk/wght";
+import "@fontsource/jetbrains-mono/latin-400";
+import "@fontsource/jetbrains-mono/latin-500";
+import "@fontsource/jetbrains-mono/latin-700";
 import Script from "next/script";
 import "./globals.css";
 
-const display = Big_Shoulders({ subsets: ["latin"], weight: ["700", "800", "900"], variable: "--f-display" });
-const body = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--f-body" });
-const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--f-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
@@ -25,7 +29,7 @@ const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en">
       <body>
         {children}
         {PIXEL_ID ? (

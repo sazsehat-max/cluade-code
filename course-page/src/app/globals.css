@@ -8,6 +8,9 @@
    ========================================================= */
 
 :root {
+  --f-display: "Big Shoulders Display";
+  --f-body: "Hanken Grotesk Variable";
+  --f-mono: "JetBrains Mono";
   --ob: #0e0d0c;
   --panel: #171513;
   --panel-2: #1f1c19;
