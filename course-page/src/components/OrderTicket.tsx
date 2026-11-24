@@ -43,6 +43,19 @@ function readUtm(): Record<string, string> {
   return out;
 }
 
+/** Keeps the applied code in the address bar, so it survives Back, refresh and sharing. */
+function rememberCode(code: string) {
+  try {
+    const url = new URL(window.location.href);
+    if (code) url.searchParams.set("code", code);
+    else url.searchParams.delete("code");
+    url.searchParams.delete("coupon");
+    window.history.replaceState(window.history.state, "", url.toString());
+  } catch {
+    /* not critical */
+  }
+}
+
 export default function OrderTicket() {
   const [codeInput, setCodeInput] = useState("");
   const [applied, setApplied] = useState<Quote | null>(null);
@@ -55,6 +68,7 @@ export default function OrderTicket() {
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
   const [notice, setNotice] = useState("");
+  const [checkoutUrl, setCheckoutUrl] = useState("");
 
   const total = applied?.totalCents ?? LIST;
   const shown = useTicking(total);
@@ -80,6 +94,7 @@ export default function OrderTicket() {
       } else {
         setApplied(data.quote);
         setCodeInput(data.quote.code);
+        rememberCode(data.quote.code);
       }
     } catch {
       setCodeError("Couldn't check the code. Check your connection and try again.");
@@ -103,10 +118,23 @@ export default function OrderTicket() {
       void applyCode(c);
     };
     window.addEventListener("mt:apply-code", onApply);
-    return () => window.removeEventListener("mt:apply-code", onApply);
+    // Coming back with the browser's Back button restores this page from memory with the
+    // button still in its "Opening…" state. Reset it so the visitor can continue.
+    const onShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setSubmitting(false);
+        setCheckoutUrl("");
+      }
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => {
+      window.removeEventListener("mt:apply-code", onApply);
+      window.removeEventListener("pageshow", onShow);
+    };
   }, []);
 
   function removeCode() {
+    rememberCode("");
     setApplied(null);
     setCodeInput("");
     setCodeError("");
@@ -114,22 +142,36 @@ export default function OrderTicket() {
 
   async function checkout(e: React.FormEvent) {
     e.preventDefault();
+    if (submitting) return;
     setFormError("");
+    setCheckoutUrl("");
     setSubmitting(true);
+    const ctrl = new AbortController();
+    const timer = window.setTimeout(() => ctrl.abort(), 15000);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstName, email, phone, code: applied?.code ?? "", utm: readUtm() }),
+        signal: ctrl.signal,
       });
       const data = await res.json();
       if (!res.ok || !data.url) throw new Error(data.error || "Checkout couldn't start. Try again in a moment.");
       const w = window as unknown as { fbq?: (...a: unknown[]) => void };
       w.fbq?.("track", "InitiateCheckout", { value: total / 100, currency: "USD" });
-      window.location.assign(data.url);
+      window.location.href = data.url;
+      // If the checkout page is slow to open (or the browser blocked the redirect),
+      // give the visitor a direct link instead of a button that looks frozen.
+      window.setTimeout(() => {
+        setCheckoutUrl(data.url);
+        setSubmitting(false);
+      }, 5000);
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : "Checkout couldn't start.");
+      const aborted = err instanceof DOMException && err.name === "AbortError";
+      setFormError(aborted ? "Checkout is taking too long to respond. Check your connection and try again." : err instanceof Error ? err.message : "Checkout couldn't start.");
       setSubmitting(false);
+    } finally {
+      window.clearTimeout(timer);
     }
   }
 
@@ -244,6 +286,16 @@ export default function OrderTicket() {
       {formError ? (
         <p className="ticket__err" role="alert">
           {formError}
+        </p>
+      ) : null}
+
+      {checkoutUrl ? (
+        <p className="ticket__notice">
+          Checkout is opening. If it doesn&rsquo;t appear,{" "}
+          <a href={checkoutUrl} className="ticket__link">
+            open the secure checkout page
+          </a>
+          .
         </p>
       ) : null}
 
