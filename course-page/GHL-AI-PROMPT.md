@@ -1,17 +1,24 @@
 # GHL AI prompt: Day Trading Warrior course landing page
 
-How to use:
-- **Full prompt** (Part 1): paste into GHL's AI page/funnel builder in one go.
-- If GHL's AI has a character limit, paste **Part 1 → Global design** first, then each **Section** one at a time ("Add this section below the previous one: …").
-- **Part 2** is a Custom Code snippet for the coupon box and the "Filled at $1,200" ticket. GHL's AI can't build that logic, so add it yourself (Add Element → Custom JS/HTML) where the prompt says `[COUPON TICKET – CUSTOM CODE]`.
+Everything here is built by GHL's AI. No custom code.
 
-Before you paste, replace the two checkout links:
-- `{{FULL_PRICE_CHECKOUT_URL}}` → your $1,600 order page, e.g. `https://course-offer.demarkettitans.com/course-checkout`
-- `{{TITAN25_CHECKOUT_URL}}` → your $1,200 order page, e.g. `https://course-offer.demarkettitans.com/course-checkout-titan25`
+How the coupon works (all native GHL):
+- The landing page shows **$1,600**, and tells visitors to use **code TITAN25 at checkout** for 25% off.
+- Every button goes to **one GHL checkout page** with the product *Day Trading Warrior Course* ($1,600).
+- On that page, GHL's own order form has a **coupon box**. The buyer types TITAN25 and GHL changes the total to **$1,200**. (The TITAN25 coupon already exists in your GHL and only works on this product.)
+- GHL's own **Order Submitted** workflow sends course access.
+
+How to use:
+1. Paste **Prompt A** into GHL's AI to build the landing page.
+2. Paste **Prompt B** into GHL's AI to build the checkout page.
+3. Do the 4 settings clicks in **Part C** (they're settings toggles, not code).
+4. If GHL's AI has a character limit, paste the *Global design system* first, then one section at a time ("Add this section below the previous one: …").
+
+Before pasting Prompt A, replace `{{CHECKOUT_URL}}` with your checkout page link (you get it after building Prompt B, e.g. `https://course-offer.demarkettitans.com/course-checkout`). You can also build Prompt B first.
 
 ---
 
-## Part 1: The prompt (copy everything inside the box)
+## Prompt A: Landing page (copy everything inside the box)
 
 ```
 Build a single, long-form, high-converting sales landing page for an online trading course. Follow every instruction below exactly. Use the exact copy provided — do not rewrite, shorten, add hype, add income claims, add countdown timers, or invent testimonials, numbers or module names.
@@ -22,7 +29,7 @@ Product: "The Day Trading Warrior Course" by Demark Davis.
 What it is: a step-by-step price action and market structure trading system for US30, Gold and futures. 19 modules, lifetime access, private Telegram community included.
 Audience: retail traders (mostly US, mostly on mobile, many from Facebook/Instagram ads) who are inconsistent or new, frustrated by guessing, signals and blown accounts.
 Page goal: one action only — enroll. Every button goes to checkout. No navigation menu links other than the logo and one "Enroll now" button.
-Pricing logic: list price $1,600. Code TITAN25 gives 25% off = $1,200. Show "$1,600" struck through next to "$1,200 with code TITAN25" wherever price appears.
+Pricing logic: list price $1,600. Code TITAN25, entered at checkout, gives 25% off = $1,200. Wherever price appears, show "$1,600" struck through next to "$1,200 with code TITAN25 at checkout".
 Tone: direct, calm, disciplined, confident. Short sentences. Plain words. No exclamation marks, no emojis, no "get rich", no guarantees of profit.
 
 === GLOBAL DESIGN SYSTEM ===
@@ -48,17 +55,17 @@ Every section starts with a small mono "eyebrow" label in bronze above the H2.
 Buttons: solid Titan Red #D7262E, white bold text, 4px radius, 4px solid darker red bottom shadow (#A8161D) so it looks pressable, generous padding (18px 30px for large). Full width on mobile.
 Layout: max content width 1200px, centered, 40px side padding desktop, 16px mobile. Section vertical padding ~120px desktop / 72px mobile. Alternate section backgrounds between #0E0D0C and #171513, separated by a 1px #2F2A25 line.
 Corners: small (4–6px). No heavy gradients, no glows except one soft red radial glow behind the hero video. No stock photos.
-Mobile: everything stacks to one column. Add a sticky bottom bar on mobile (appears after scrolling past the hero) with "$1,600" struck through, "$1,200" in bold, small text "with TITAN25", and a red "Enroll" button that scrolls to the Enroll section.
+Mobile: everything stacks to one column. If GHL supports a sticky/fixed bar, add one at the bottom on mobile with "$1,600" struck through, "$1,200" in bold, small text "with TITAN25", and a red "Enroll" button linking to {{CHECKOUT_URL}}. If not, skip it.
 Accessibility: high contrast, visible focus outlines, all images with alt text.
 
 === SECTION 0 — TICKER BAR (very top, full width) ===
-A thin full-width red (#D7262E) bar, white mono uppercase 12px text, scrolling slowly right-to-left like a stock ticker, items separated by a small ▲:
+A thin full-width red (#D7262E) bar, white mono uppercase 12px text, items separated by a small ▲. If a scrolling/marquee text element is available, make it scroll slowly right-to-left like a stock ticker; otherwise keep it static and centered, showing as many items as fit:
 "US30 · GOLD · FUTURES ▲ 19 STEP-BY-STEP MODULES ▲ LIFETIME ACCESS ▲ PRIVATE TELEGRAM ROOM INCLUDED ▲ CODE TITAN25 TAKES 25% OFF ▲ PRICE ACTION, NOT INDICATORS"
 
 === SECTION 1 — HEADER (sticky) ===
 Dark translucent bar (#0E0D0C at 86% opacity, blur), 64px tall, bottom 1px line #2F2A25.
 Left: logo image https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/69777a4fd4fb9050150771c2.png (36px tall) + text "MARKET" in bone and "TITANS" in red, headline font, uppercase.
-Right: small red button "Enroll now" → scrolls to the Enroll section.
+Right: small red button "Enroll now" → {{CHECKOUT_URL}}.
 
 === SECTION 2 — HERO ===
 Background #0E0D0C with very faint horizontal lines every 80px (like a chart's price grid, 4% opacity) and a soft red glow behind the video.
@@ -67,7 +74,7 @@ Left column:
 - Eyebrow: "THE DAY TRADING WARRIOR COURSE · BY DEMARK DAVIS"
 - H1 on two lines: "STOP GUESSING." (bone) / "START EXECUTING." (red #EE3A41)
 - Sub-headline (20px, muted, max ~46 characters per line): "A step-by-step price action system for **US30, Gold and futures**. Learn exactly what to look for, when to wait, and how much to risk, before you ever click buy."
-- Large red button: "Enroll in the course" → Enroll section.
+- Large red button: "Enroll in the course" → {{CHECKOUT_URL}}.
 - Next to the button, mono text: "~~$1,600~~ **$1,200** with code [TITAN25]" — TITAN25 inside a small dashed bronze-bordered box.
 - Below, a row of 3 facts separated by thin vertical lines, each a big headline-font word with a small label under it: "19" / "step-by-step modules", "LIFETIME" / "access", "TELEGRAM" / "room included".
 Right column:
@@ -176,14 +183,25 @@ Footer row with a 2px bone top border, headline font: "TOTAL VALUE" … "$4,899"
 Under the ledger, a bordered guarantee box with a bronze shield-check icon:
 Title "Action-based support guarantee"
 Text: "Because you get instant access to digital material, all sales are final. But you won't be left on your own: if you complete the course, follow the process and don't see progress in your execution, we'll give you a private 1-on-1 strategy audit to find what's breaking down."
-Right — [COUPON TICKET – CUSTOM CODE]: leave an empty Custom Code / HTML element here, about 460px wide. (I will paste the code myself.) If you cannot leave a code element, build a static fallback card: light paper background #F6F1E7, dark text #17140F, mono font, title "ENROLLMENT TICKET · MT-DTW", rows "Course: Day Trading Warrior", "Access: Lifetime + Telegram room", "List price: $1,600", a highlighted line "Code TITAN25: −25% → $1,200", a big total "$1,200", and two buttons: red "Enroll for $1,200 with TITAN25" → {{TITAN25_CHECKOUT_URL}} and a small text link "Pay full price ($1,600)" → {{FULL_PRICE_CHECKOUT_URL}}.
+Right — the ENROLLMENT TICKET card (built with normal text, divider and button elements, no code):
+- Card styled like a printed paper order ticket: background #F6F1E7, dark text #17140F, 4px corners, 26px padding, big soft dark shadow. Use the mono font for everything except the button. If possible, give the top and bottom edges a scalloped/perforated look; otherwise use a 2px dashed #17140F border on top and bottom.
+- Header row: left "ENROLLMENT TICKET · MT-DTW" (11px, bold, uppercase, letter-spaced); right a small green (#2F9A63) pill with white text "CODE: TITAN25". Then a dashed divider.
+- Rows (label left in small grey uppercase #6B6358, value right in bold), thin dividers between:
+  COURSE — Day Trading Warrior
+  ACCESS — Lifetime + Telegram room
+  LIST PRICE — $1,600 (struck through with a red line)
+  TITAN25 · −25% — −$400 (this whole row in green #2F9A63)
+- A 2px solid dark line, then a total row: "TOTAL WITH TITAN25" (small bold uppercase, top-left) and "$1,200" very large (56px, headline font, weight 900) on the right. Next to it, a slightly rotated (−9°) red outlined "stamp" label: "FILLED AT $1,200".
+- A dashed divider, then a highlighted coupon box: 1.5px dashed green border, light green background (#E9F2EA), text: "Enter code TITAN25 on the checkout page to unlock $1,200." with TITAN25 in bold.
+- Full-width red button (white bold text, darker red bottom shadow): "Continue to secure checkout · $1,200 with TITAN25" → {{CHECKOUT_URL}}.
+- Small text under the button (12.5px, #6B6358) with a small green shield icon: "Secure, encrypted checkout. Access emailed instantly after payment."
 
 === SECTION 10 — FAQ ===
 Two columns: left eyebrow "QUESTIONS", H2 "STRAIGHT ANSWERS.", paragraph "Still unsure? Reply to any of our emails and a real person from the team will get back to you." Right: accordion (closed by default, red "+" icon that rotates to "×" when open, thin dividers):
 Q: Is this course for beginners? A: Yes, and for traders who've been at it a while but can't stay consistent. If you're new, it gives you a structured foundation so you don't waste months jumping between strategies. If you have experience, it tightens your execution, your discipline and your process.
 Q: Is this signals, or real trading education? A: Real education. You'll learn to read price action, understand market structure, manage risk and execute with a clear framework, so you can make decisions for yourself.
 Q: How do I get access after I pay? A: Right away. As soon as your payment goes through, we email your course login and your Telegram invite to the address you used at checkout. If it isn't in your inbox within 10 minutes, check spam or promotions.
-Q: How do I use a coupon code? A: Type your code in the enrollment ticket and press Apply. You'll see the discount and your new total before you continue, and the payment page shows the same discounted price.
+Q: How do I use the coupon code? A: Click any Enroll button, then type TITAN25 in the coupon box on the checkout page and press Apply. Your total drops from $1,600 to $1,200 before you pay.
 Q: How long do I have access? A: For life. Go through the training at your own pace and come back to any lesson whenever you need it.
 Q: How much time do I need each day? A: You don't need to stare at charts all day. The system is built around quality over quantity, so you can build a focused routine around your schedule.
 Q: Do I need a big account? A: No. This course builds skill, discipline and execution. A trader with structure and risk control is in a stronger position than a trader with more money and no system.
@@ -195,7 +213,7 @@ Q: Is this financial advice? A: No. This program is for educational purposes onl
 === SECTION 11 — FINAL CALL TO ACTION ===
 Centered, background #0E0D0C with a soft red glow rising from the bottom.
 Huge headline (two lines): "THE MARKET OPENS TOMORROW EITHER WAY." (bone) / "SHOW UP WITH A PLAN." (red)
-Large red button: "Enroll for $1,200 with TITAN25" → Enroll section (#enroll).
+Large red button: "Enroll for $1,200 with TITAN25" → {{CHECKOUT_URL}}.
 
 === SECTION 12 — FOOTER ===
 Small text (12.5px, faint #6F665C), top 1px divider:
@@ -204,172 +222,89 @@ Logo (64px) + "© 2026 Built By Determination Tech LLC · Market Titans. All rig
 "This site is not part of the Facebook website or Meta Platforms, Inc., and is not endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc."
 
 === BUTTON & LINK RULES ===
-- Every "Enroll" button on the page scrolls to the Enroll section (#enroll). Only the ticket in the Enroll section links to checkout.
+- Every "Enroll" button on the page links to {{CHECKOUT_URL}} (same tab).
 - Keep the page free of exit links (no menu, no social links).
 - SEO title: "The Day Trading Warrior Course | Market Titans". Meta description: "Demark Davis's step-by-step price action system for US30, Gold and futures. 19 modules, lifetime access and a private Telegram trading room."
 ```
 
 ---
 
-## Part 2: Coupon ticket (Custom Code element)
+## Prompt B: Checkout page (copy everything inside the box)
 
-In the GHL editor, in the Enroll section's right column: **Add Element → Custom JS/HTML → Open code editor**, paste everything below, replace the two URLs at the top, and save.
+Build this as the checkout step of a funnel named `Course Checkout`, path `course-checkout`.
 
-What it does: shows the paper "enrollment ticket", validates the code, animates $1,600 → $1,200 with a "Filled at $1,200" stamp, then sends the buyer to the matching GHL order page with their name, email and phone pre-filled. It also auto-applies `?code=TITAN25` from the page link.
+```
+Build a short, distraction-free checkout page for "The Day Trading Warrior Course" by Market Titans. It must match the landing page's dark, premium style exactly and use only native GHL elements (no custom code). Use the exact copy below.
 
-```html
-<!-- Market Titans enrollment ticket. Paste into a GHL Custom JS/HTML element. -->
-<div id="mt-ticket-root"></div>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&family=JetBrains+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-#mt-ticket-root{max-width:460px;margin:0 auto}
-.mtk{--ink:#17140f;--red:#d7262e;--redd:#a8161d;--ok:#2f9a63;background:#f6f1e7;color:var(--ink);padding:26px 24px 22px;border-radius:4px;font-family:'JetBrains Mono',monospace;box-shadow:0 30px 70px -25px rgba(0,0,0,.85);
--webkit-mask:radial-gradient(circle at 50% 0,transparent 5px,#000 5.5px) top/18px 10px repeat-x,radial-gradient(circle at 50% 100%,transparent 5px,#000 5.5px) bottom/18px 10px repeat-x,linear-gradient(#000,#000) center/100% calc(100% - 20px) no-repeat;
-mask:radial-gradient(circle at 50% 0,transparent 5px,#000 5.5px) top/18px 10px repeat-x,radial-gradient(circle at 50% 100%,transparent 5px,#000 5.5px) bottom/18px 10px repeat-x,linear-gradient(#000,#000) center/100% calc(100% - 20px) no-repeat}
-.mtk *{box-sizing:border-box}
-.mtk-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1.5px dashed rgba(23,20,15,.35);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap}
-.mtk-st{padding:3px 8px;border:1.5px solid var(--ink);border-radius:3px}
-.mtk.on .mtk-st{background:var(--ok);border-color:var(--ok);color:#fff}
-.mtk-r{display:flex;justify-content:space-between;gap:12px;padding:9px 0;font-size:14px;border-bottom:1px solid rgba(23,20,15,.1)}
-.mtk-r span:first-child{color:#6b6358;text-transform:uppercase;font-size:12px;letter-spacing:.08em}
-.mtk-r b{font-weight:700}
-.mtk-list{position:relative}
-.mtk-list:after{content:"";position:absolute;left:-2px;right:-2px;top:52%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .45s}
-.mtk.on .mtk-list{color:#8a8174}.mtk.on .mtk-list:after{transform:scaleX(1)}
-.mtk-disc{display:none;color:var(--ok)}.mtk.on .mtk-disc{display:flex}
-.mtk-lbl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6b6358;margin:16px 0 6px}
-.mtk-cf{display:flex;gap:8px}
-.mtk input{width:100%;font-family:'Hanken Grotesk',sans-serif;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid rgba(23,20,15,.22);border-radius:3px;padding:11px 12px}
-.mtk input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(192,144,79,.35)}
-.mtk-cf input{letter-spacing:.12em;font-weight:700;text-transform:uppercase}
-.mtk-ap{font:700 14px 'Hanken Grotesk',sans-serif;background:transparent;border:1.5px solid var(--ink);border-radius:3px;padding:0 16px;cursor:pointer;color:var(--ink)}
-.mtk-ap:hover{background:var(--ink);color:#f6f1e7}
-.mtk-ok{display:none;justify-content:space-between;align-items:center;padding:10px 12px;border:1.5px dashed var(--ok);border-radius:3px;font-size:13px;color:#1e6b44;background:rgba(47,154,99,.07)}
-.mtk.on .mtk-ok{display:flex}.mtk.on .mtk-cf{display:none}
-.mtk-rm{background:none;border:0;text-decoration:underline;cursor:pointer;font:inherit;color:inherit}
-.mtk-err{min-height:0;margin:6px 0 0;font:600 13px 'Hanken Grotesk',sans-serif;color:var(--redd)}
-.mtk-t{position:relative;margin:18px 0 6px;padding:16px 0;min-height:96px;border-top:2px solid var(--ink);border-bottom:1.5px dashed rgba(23,20,15,.35);display:flex;justify-content:space-between;align-items:flex-end}
-.mtk-t>span{align-self:flex-start;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
-.mtk-t strong{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:56px;line-height:.9;font-variant-numeric:tabular-nums}
-.mtk-stamp{display:none;position:absolute;left:30%;top:64%;transform:translate(-50%,-50%) rotate(-9deg);border:2.5px solid var(--red);color:var(--red);padding:4px 10px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;opacity:.88;animation:mtkst .5s .55s cubic-bezier(.2,1.6,.4,1) both}
-.mtk.on .mtk-stamp{display:block}
-@keyframes mtkst{from{opacity:0;transform:translate(-50%,-50%) rotate(-9deg) scale(1.9)}}
-.mtk-f{display:grid;gap:10px;margin-top:16px}
-.mtk-f p{margin:0 0 2px;font:700 15px 'Hanken Grotesk',sans-serif}
-.mtk-f label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6b6358;margin-bottom:5px}
-.mtk-go{margin-top:16px;width:100%;border:0;border-radius:4px;background:var(--red);color:#fff;font:700 16px 'Hanken Grotesk',sans-serif;padding:16px;cursor:pointer;box-shadow:0 4px 0 var(--redd)}
-.mtk-go:hover{background:#ee3a41}.mtk-go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--redd)}
-.mtk-fine{margin:12px 0 0;font:12.5px/1.5 'Hanken Grotesk',sans-serif;color:#6b6358}
-@media (max-width:420px){.mtk{padding:24px 16px 20px}.mtk-t strong{font-size:46px}.mtk-stamp{display:none!important}}
-@media (prefers-reduced-motion:reduce){.mtk *{animation:none!important;transition:none!important}}
-</style>
-<script>
-(function () {
-  // ====== EDIT THESE ======
-  var LIST_PRICE = 1600;
-  var CHECKOUT = {
-    "default": "{{FULL_PRICE_CHECKOUT_URL}}",
-    "TITAN25": "{{TITAN25_CHECKOUT_URL}}"
-  };
-  var COUPONS = { "TITAN25": 25 }; // code: percent off. Each code needs a matching GHL order page above.
-  // ========================
+=== DESIGN ===
+Same design system as the landing page:
+Background #0E0D0C, panels #171513, dividers #2F2A25, text #EDE6DA, bold text #F6F1E7, muted #A0968A, Titan Red #D7262E (hover #EE3A41, button shadow #A8161D), bronze labels #C0904F, success green #2F9A63.
+Headlines: "Big Shoulders Display" (fallback "Oswald"/"Anton"), 800–900, ALL CAPS. Body: "Hanken Grotesk" (fallback "Inter"). Labels and prices: "JetBrains Mono" (fallback "Roboto Mono"), uppercase, letter-spaced, bronze.
+Max width 1100px, centered. Mobile: one column, order form first.
 
-  var root = document.getElementById("mt-ticket-root");
-  if (!root) return;
-  var fmt = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
-  root.innerHTML =
-    '<form class="mtk" novalidate>' +
-      '<div class="mtk-h"><span>Enrollment ticket · MT-DTW</span><span class="mtk-st">Open</span></div>' +
-      '<div class="mtk-r"><span>Course</span><b>Day Trading Warrior</b></div>' +
-      '<div class="mtk-r"><span>Access</span><b>Lifetime + Telegram room</b></div>' +
-      '<div class="mtk-r"><span>List price</span><b class="mtk-list">' + fmt(LIST_PRICE) + '</b></div>' +
-      '<div class="mtk-r mtk-disc"><span class="mtk-dl"></span><b class="mtk-dv"></b></div>' +
-      '<label class="mtk-lbl" for="mtk-code">Coupon code</label>' +
-      '<div class="mtk-cf"><input id="mtk-code" autocomplete="off" placeholder="Enter code"><button type="button" class="mtk-ap">Apply</button></div>' +
-      '<div class="mtk-ok"><span class="mtk-okt"></span><button type="button" class="mtk-rm">Remove</button></div>' +
-      '<p class="mtk-err" role="alert"></p>' +
-      '<div class="mtk-t"><span>Total today</span><strong aria-live="polite">' + fmt(LIST_PRICE) + '</strong><span class="mtk-stamp"></span></div>' +
-      '<div class="mtk-f"><p>Where should we send your access?</p>' +
-        '<div><label for="mtk-fn">First name</label><input id="mtk-fn" autocomplete="given-name" required></div>' +
-        '<div><label for="mtk-em">Email</label><input id="mtk-em" type="email" autocomplete="email" required></div>' +
-        '<div><label for="mtk-ph">Phone (optional, for text reminders)</label><input id="mtk-ph" type="tel" autocomplete="tel"></div>' +
-      '</div>' +
-      '<button type="submit" class="mtk-go">Continue to secure checkout · ' + fmt(LIST_PRICE) + '</button>' +
-      '<p class="mtk-fine">Secure, encrypted checkout. Access emailed instantly after payment.</p>' +
-    '</form>';
+=== TOP BAR ===
+Thin red (#D7262E) bar, white mono uppercase 12px text, centered: "USE CODE TITAN25 BELOW FOR 25% OFF · $1,600 → $1,200"
+Below it: centered logo https://images.leadconnectorhq.com/image/f_webp/q_80/r_320/u_https://assets.cdn.filesafe.space/DYG4MhubhMu6t5fWQcS3/media/69777a4fd4fb9050150771c2.png (48px tall). No navigation, no links.
 
-  var f = root.querySelector(".mtk"), q = function (s) { return root.querySelector(s); };
-  var total = q(".mtk-t strong"), go = q(".mtk-go"), err = q(".mtk-err"), codeIn = q("#mtk-code");
-  var current = LIST_PRICE, applied = null;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+=== HEADER ===
+Bronze mono eyebrow: "SECURE CHECKOUT · MARKET TITANS"
+H1 (56px desktop / 38px mobile): "COMPLETE YOUR ENROLLMENT." with "ENROLLMENT." in red #EE3A41.
+Subtext (muted): "You're one step from the Day Trading Warrior Course. Enter code TITAN25 in the coupon box to pay $1,200 instead of $1,600."
 
-  function tick(to) {
-    var from = current; current = to;
-    if (reduce || from === to) { total.textContent = fmt(to); return; }
-    var t0 = performance.now();
-    (function step(t) {
-      var p = Math.min(1, (t - t0) / 750), e = 1 - Math.pow(1 - p, 3);
-      total.textContent = fmt(Math.round((from + (to - from) * e) / 100) * 100);
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-  function apply(raw) {
-    var code = String(raw || "").trim().toUpperCase();
-    err.textContent = "";
-    if (!code) { err.textContent = "Enter a code first."; return; }
-    var pct = COUPONS[code];
-    if (!pct || !CHECKOUT[code]) { applied = null; err.textContent = "That code isn't valid. Check the spelling and try again."; return; }
-    applied = code;
-    var off = LIST_PRICE * pct / 100, to = LIST_PRICE - off;
-    q(".mtk-dl").innerHTML = code + ' <small>−' + pct + '%</small>';
-    q(".mtk-dv").textContent = "−" + fmt(off);
-    q(".mtk-okt").innerHTML = "<b>" + code + "</b> saves you " + fmt(off);
-    q(".mtk-st").textContent = "Code applied";
-    q(".mtk-stamp").textContent = "Filled at " + fmt(to);
-    f.classList.add("on");
-    go.textContent = "Continue to secure checkout · " + fmt(to);
-    tick(to);
-  }
-  function removeCode() {
-    applied = null; f.classList.remove("on"); codeIn.value = ""; err.textContent = "";
-    q(".mtk-st").textContent = "Open";
-    go.textContent = "Continue to secure checkout · " + fmt(LIST_PRICE);
-    tick(LIST_PRICE);
-  }
-  q(".mtk-ap").addEventListener("click", function () { apply(codeIn.value); });
-  codeIn.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); apply(codeIn.value); } });
-  q(".mtk-rm").addEventListener("click", removeCode);
+=== TWO COLUMNS (desktop: form left 55%, summary right 45%; mobile: form first) ===
+LEFT — ORDER FORM:
+- Use GHL's native Order Form element, one-step layout, on a #171513 panel with 1px #2F2A25 border, 6px corners, 28px padding.
+- Contact fields: First Name, Last Name, Email, Phone. Then card payment fields.
+- Coupon code field visible, with an "Apply" button. Directly above it, a small green (#2F9A63) mono label: "HAVE A CODE? ENTER TITAN25".
+- Order summary inside the form shows the product and total.
+- Submit button: full width, Titan Red, white bold text, darker red bottom shadow, text "Complete my enrollment".
+- Under the button, small muted text with a lock icon: "Secure, encrypted payment. Your course login is emailed instantly after purchase."
 
-  f.addEventListener("submit", function (e) {
-    e.preventDefault(); err.textContent = "";
-    var fn = q("#mtk-fn").value.trim(), em = q("#mtk-em").value.trim(), ph = q("#mtk-ph").value.trim();
-    if (!fn) { err.textContent = "Enter your first name."; return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { err.textContent = "Enter a valid email so we can send your course access."; return; }
-    var url = new URL(CHECKOUT[applied] || CHECKOUT["default"]);
-    url.searchParams.set("first_name", fn);
-    url.searchParams.set("email", em);
-    if (ph) url.searchParams.set("phone", ph);
-    var here = new URLSearchParams(location.search);
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach(function (k) {
-      if (here.get(k)) url.searchParams.set(k, here.get(k));
-    });
-    if (window.fbq) window.fbq("track", "InitiateCheckout", { value: current, currency: "USD" });
-    go.disabled = true; go.textContent = "Opening secure checkout…";
-    window.location.href = url.toString();
-  });
+RIGHT — WHAT YOU GET (a bone paper "ticket" card, background #F6F1E7, dark text #17140F, mono font):
+- Header: "ORDER SUMMARY · MT-DTW", dashed divider.
+- Rows (grey label left, bold value right):
+  COURSE — Day Trading Warrior
+  ACCESS — Lifetime + Telegram room
+  LIST PRICE — $1,600
+  WITH CODE TITAN25 — $1,200 (green #2F9A63)
+- Then a short checklist with red ✓ icons (body font):
+  The Core Masterclass: 19 modules, lifetime access
+  Live trade review sessions (recorded)
+  Prop firm capital protection guide
+  Daily pre-market checklists & templates
+  Private Telegram community (normally $99/mo), free with enrollment
+  Official course completion credential
+- Below the card, a bordered dark box with a bronze shield icon:
+  Title: "Action-based support guarantee"
+  Text: "Because you get instant access to digital material, all sales are final. If you complete the course, follow the process and don't see progress in your execution, we'll give you a private 1-on-1 strategy audit."
+- Then 3 small trust rows with icons: "Instant access after payment", "Lifetime access, learn at your pace", "Private Telegram trading room".
 
-  var pre = new URLSearchParams(location.search).get("code");
-  if (pre) { codeIn.value = pre.toUpperCase(); apply(pre); }
-})();
-</script>
+=== FOOTER ===
+12px faint text #6F665C, centered:
+"Trading involves substantial risk, including the loss of capital. This program is educational only and is not financial advice. Results are not typical and not guaranteed."
+"© 2026 Built By Determination Tech LLC · Market Titans."
+
+=== RULES ===
+No exit links, no countdown timers, no income claims, no pop-ups. Keep the page short so the form is visible immediately on mobile.
 ```
 
-> Note: this snippet doesn't save the lead to GHL before checkout (the Next.js version does). GHL captures the contact on the order page itself. For abandoned-cart follow-up on the GHL-built page, use GHL's built-in **Order Form Submission / Abandoned Cart** options on the order page instead.
+---
 
-## Part 3: After GHL's AI builds the page
+## Part C: 4 settings clicks after GHL's AI builds the pages
 
-1. Check the copy wasn't rewritten. Fix any income claims or countdowns it added.
-2. Paste the Part 2 snippet in the Enroll section.
-3. Point every "Enroll" button to the section with the ticket (button action: **Go to section** → Enroll).
-4. Set the sticky mobile bar's button to scroll to Enroll too.
-5. Preview on mobile, then publish.
+These are switches in GHL's settings, not code. GHL's AI usually can't set them itself:
+
+1. **Attach the product.** Open the checkout funnel step → **Products** tab → **Add Product** → *Day Trading Warrior Course* → price **Full price ($1,600)** → Save. (Use only this product. The TITAN25 coupon is limited to it.)
+2. **Turn on the coupon box.** In the page editor, click the order form → settings → enable **Show coupon code** (sometimes labelled *Coupon field*).
+3. **Set the thank-you step.** Add a step after checkout called `Thank You` and ask GHL's AI: *"Build a short thank-you page in the same dark Market Titans style: headline 'YOU'RE IN. CHECK YOUR EMAIL.' and three steps: open the access email, join the Telegram room, start Module 1 today."*
+4. **Paste the checkout link into the landing page.** Replace `{{CHECKOUT_URL}}` in the landing page buttons (or ask GHL's AI: *"Set every Enroll button on this page to link to [your checkout URL]"*).
+
+Then build the **access workflow** (Automation → Workflows → trigger **Order Submitted** on the checkout page → send the access email), as described in the earlier step-by-step guide.
+
+## Test before going live
+
+1. Put the order form in **Test mode** and buy with card `4242 4242 4242 4242`, any future date, any CVC.
+2. Check that the total is $1,600, that typing TITAN25 brings it to $1,200, and that the access email arrives.
+3. Switch back to **Live**.
+
+> Note: the two-product setup from before is no longer needed. With this approach you only use *Day Trading Warrior Course* ($1,600) plus the TITAN25 coupon. The *TITAN25 Offer* product ($1,200) can stay unused or be archived.
