@@ -18,11 +18,11 @@ export const BRAND = {
 };
 
 export const TICKER = [
+  "Launch offer: code TITAN25 takes 25% off",
   "US30 · Gold · Futures",
   "19 step-by-step modules",
   "Lifetime access",
   "Private Telegram room included",
-  "Code TITAN25 takes 25% off",
   "Price action, not indicators",
 ];
 
@@ -171,4 +171,63 @@ export const FAQ = [
     q: "Is this financial advice?",
     a: "No. This program is for educational purposes only.",
   },
+];
+
+/* ---------- redesign additions ---------- */
+
+export const HERO = {
+  pill: "For traders tired of guessing on US30, Gold & futures",
+  sub: "You don't need another indicator, another signal group or another strategy video. You need one process you can follow when the candle is moving fast and your heart is pounding. That's what this course gives you.",
+};
+
+export const TRUST = ["Instant access", "Lifetime access", "Secure checkout", "Private Telegram room"];
+
+export const PAIN_MOMENTS = [
+  { title: "Stopped out, then it runs", body: "You get taken out by a few points, and price goes exactly where you said it would. Without you." },
+  { title: "Winners cut, losers held", body: "You grab a small win out of fear, then hold a loser “until it comes back”. It doesn't." },
+  { title: "One bad trade becomes five", body: "You need to make it back today, so you keep clicking. The red day gets redder." },
+  { title: "Hours of videos, still frozen", body: "You've watched more trading content than you can count, and you still hesitate at the entry." },
+  { title: "Following calls you don't understand", body: "Someone posts a trade, you copy it, it fails, and you have no idea why." },
+  { title: "Same account, a year later", body: "After all the effort, your balance looks the same as it did last year. Or smaller." },
+];
+
+export const COST = [
+  { k: "Money", body: "Every unplanned trade is money handed to traders who did have a plan." },
+  { k: "Time", body: "Another month of free videos is another month of the same results." },
+  { k: "Confidence", body: "Each blown day makes the next good setup harder to take." },
+];
+
+export const CHECKLIST = [
+  "Key level marked on the higher timeframe",
+  "Price reacted at the level and confirmed",
+  "Stop placed where the idea is proven wrong",
+  "Position size set before entry",
+  "Reward is worth the risk",
+];
+
+export const DASH_MODULES = [
+  { n: 1, t: "The Day Trading Warrior", s: "done" },
+  { n: 2, t: "Trading Introduction", s: "done" },
+  { n: 3, t: "Trading Psychology", s: "now" },
+  { n: 4, t: "Healthy Lifestyle", s: "next" },
+  { n: 5, t: "Technical & Fundamental Analysis", s: "next" },
+  { n: 6, t: "Support & Resistance", s: "lock" },
+];
+
+export const COMPARE = {
+  cols: ["Market Titans", "Free YouTube", "Signal groups", "Going it alone"],
+  rows: [
+    { f: "A clear order to learn in", v: ["yes", "no", "no", "no"] },
+    { f: "Teaches the why, not just the what", v: ["yes", "some", "no", "some"] },
+    { f: "Risk plan before every trade", v: ["yes", "some", "no", "no"] },
+    { f: "Daily pre-market watchlist", v: ["yes", "no", "yes", "no"] },
+    { f: "Community and accountability", v: ["yes", "no", "some", "no"] },
+    { f: "Builds a skill you keep", v: ["yes", "some", "no", "some"] },
+  ],
+};
+
+export const NEXT_STEPS = [
+  { t: "Check out securely", b: "Enter your details on the encrypted checkout page." },
+  { t: "Get your login", b: "Your course login lands in your inbox within minutes." },
+  { t: "Start today", b: "Join the Telegram room and finish Module 1 tonight." },
 ];
